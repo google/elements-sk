@@ -16,9 +16,12 @@
 import 'elements-sk/checkbox-sk';
 import 'elements-sk/collapse-sk';
 import 'elements-sk/dialog-sk';
+import 'elements-sk/error-toast-sk';
+import 'elements-sk/multi-select-sk';
 import 'elements-sk/nav-button-sk';
 import 'elements-sk/nav-links-sk';
 import 'elements-sk/radio-sk';
+import 'elements-sk/select-sk';
 import 'elements-sk/spinner-sk';
 import 'elements-sk/styles/buttons';
 import 'elements-sk/styles/select';
@@ -32,3 +35,8 @@ import 'elements-sk/icon/create-icon-sk';
 import 'elements-sk/icon/link-icon-sk';
 import 'elements-sk/icon/menu-icon-sk';
 import 'elements-sk/icon/warning-icon-sk';
+
+import { errorMessage } from 'elements-sk/error-toast-sk/errorMessage';
+document.getElementById('make_error').addEventListener('click', () => {
+	errorMessage('Oh no, there was a problem!', 4000 /* ms*/);
+})

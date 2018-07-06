@@ -18,6 +18,10 @@
         padding: 2em;
       }
 
+      select-sk, multi-select-sk {
+        border: 1px solid grey;
+      }
+
     </style>
     <script type="text/javascript" charset="utf-8">
       // This bit of script loads the custom elements v1 polyfill, but only if required.
@@ -29,7 +33,7 @@
     </script>
   </head>
 <body>
-  <h2 id="Buttons">Buttons</h2>
+  <h2 id="Buttons">Button Styles</h2>
   <button>Plain</button>
   <button class=action>Action</button>
   <button disabled>Plain Disabled</button>
@@ -63,7 +67,7 @@
     <a href="">Alerts</a>
   </nav-links-sk closed>
 
-  <h2 id="Select">Select</h2>
+  <h2 id="Select">Select Styles (see also select-sk below)</h2>
   <select name="some_name" id="some_name" multiple size="3">
     <option value="option1">option1</option>
     <option value="option2">option2</option>
@@ -131,6 +135,26 @@
     </div>
   </tabs-panel-sk>
 
+  <h2>select-sk and multi-select-sk</h2>
+
+  <select-sk>
+    <div>select</div>
+    <div>any</div>
+    <div selected>one</div>
+  </select-sk>
+  <br>
+  <multi-select-sk>
+    <div>select</div>
+    <div selected>any</div>
+    <div>ones</div>
+    <div>you</div>
+    <div selected>like</div>
+  </multi-select-sk>
+
+  <h2>error-toast-sk</h2>
+
+  <button id=make_error>Simulate an error</button>
+
   <h2>Icons (<a href="./icon-sk.html">Full List</a>)</h2>
   <div>
     <check-icon-sk></check-icon-sk>
@@ -140,5 +164,8 @@
     <edit-icon-sk></edit-icon-sk>
     <menu-icon-sk></menu-icon-sk>
   </div>
+
+
+  <error-toast-sk></error-toast-sk>
 </body>
 </html>
