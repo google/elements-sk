@@ -1,9 +1,9 @@
 {
   "name": "elements-sk",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "private": false,
   "description": "A set of light-weight custom elements with a uniform style.",
   "main": "index.js",
-  "homepage": "https://github.com/google/skia-buildbot/tree/master/ap/skia-elements",
+  "homepage": "https://github.com/google/elements-sk/",
   "license": "Apache-2.0"
 }
