@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** @module elements-sk/errorMessage */
+/** @module elements-sk/error-toast-sk/errorMessage */
 
 /** errorMessage dispatches an event with the error message in it.
  * <p>

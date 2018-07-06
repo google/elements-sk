@@ -23,7 +23,7 @@
  * @attr selected - The index of the tab panel to display.
  *
  */
-import { upgradeProperty } from 'common-sk/modules/upgradeProperty';
+import { upgradeProperty } from '../upgradeProperty';
 
 window.customElements.define('tabs-panel-sk', class extends HTMLElement {
   static get observedAttributes() {

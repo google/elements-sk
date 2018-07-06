@@ -49,7 +49,7 @@
  * </nav-links-sk>
  *
  */
-import { upgradeProperty } from 'common-sk/modules/upgradeProperty'
+import { upgradeProperty } from '../upgradeProperty'
 
 window.customElements.define('nav-links-sk', class extends HTMLElement {
   static get observedAttributes() {

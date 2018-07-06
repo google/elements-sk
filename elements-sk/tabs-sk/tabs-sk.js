@@ -44,7 +44,7 @@
  *        value of detail.index is the index of the selected tab.
  *
  */
-import { upgradeProperty } from 'common-sk/modules/upgradeProperty';
+import { upgradeProperty } from '../upgradeProperty';
 
 window.customElements.define('tabs-sk', class extends HTMLElement {
   constructor() {

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** @module common-sk/modules/multi-select-sk
+/** @module elements-sk/multi-select-sk
  *
  * @description <h2><code>multi-select-sk</code></h2>
  *
@@ -47,7 +47,7 @@
  *   </pre>
  *
  */
-import { upgradeProperty } from 'common-sk/modules/upgradeProperty'
+import { upgradeProperty } from '../upgradeProperty'
 
 window.customElements.define('multi-select-sk', class extends HTMLElement {
   constructor() {

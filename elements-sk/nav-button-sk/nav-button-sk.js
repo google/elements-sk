@@ -51,10 +51,10 @@
  *
  */
 
-import '../styles/buttons'
+import '../styles/buttons';
 import '../icon/menu-icon-sk';
 
-import { upgradeProperty } from 'common-sk/modules/upgradeProperty'
+import { upgradeProperty } from '../upgradeProperty'
 
 window.customElements.define('nav-button-sk', class extends HTMLElement {
   connectedCallback() {
