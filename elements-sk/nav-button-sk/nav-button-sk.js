@@ -51,7 +51,7 @@
  *
  */
 
-import '../buttons';
+import '../styles/buttons';
 import '../icon/menu-icon-sk';
 
 import { upgradeProperty } from '../upgradeProperty'

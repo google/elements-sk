@@ -11,15 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-const path = require('path');
 
-module.exports = {
-  plugins: [path.resolve(__dirname, './plugins/element')],
-  source: {
-    include: ['./elements-sk'],
-    includePattern: '.+\\.js$',
-  },
-  opts: {
-    recurse: true,
-  },
-};
+import './multi-select-sk.js'
+import './multi-select-sk.css'

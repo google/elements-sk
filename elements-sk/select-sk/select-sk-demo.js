@@ -11,15 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-const path = require('path');
 
-module.exports = {
-  plugins: [path.resolve(__dirname, './plugins/element')],
-  source: {
-    include: ['./elements-sk'],
-    includePattern: '.+\\.js$',
-  },
-  opts: {
-    recurse: true,
-  },
-};
+import '../styles/buttons'
+
+import './index.js'
+
+let select =  document.getElementById('select-sk');
+select.addEventListener('selection-changed', e => {
+   document.getElementById('event').textContent = JSON.stringify(e.detail, null, '  ');
+});
+
+// Test MutationObserver by adding a selected element to the end.
+ document.getElementById('select-add').addEventListener('click', e => {
+  let ele = document.createElement('div');
+  ele.textContent = Math.random();
+  ele.setAttribute('selected', '');
+  select.selection = -1;
+  select.appendChild(ele);
+});
