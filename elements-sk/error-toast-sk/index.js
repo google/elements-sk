@@ -11,6 +11,5 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-let config = require('node_modules/common-sk/jsdoc.common.js')
-config.source.include = ['./elements-sk'];
-module.exports = config;
+
+import './error-toast-sk.js'

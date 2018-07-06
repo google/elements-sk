@@ -11,6 +11,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-let config = require('node_modules/common-sk/jsdoc.common.js')
-config.source.include = ['./elements-sk'];
-module.exports = config;
+
+import 'elements-sk/buttons'
+
+import { $$ } from 'common-sk/modules/dom'
+
+import './index.js'
+
+let select = $$('#select-sk');
+select.addEventListener('selection-changed', e => {
+  $$('#event').textContent = JSON.stringify(e.detail, null, '  ');
+});
+
+// Test MutationObserver by adding a selected element to the end.
+$$('#select-add').addEventListener('click', e => {
+  let ele = document.createElement('div');
+  ele.textContent = Math.random();
+  ele.setAttribute('selected', '');
+  select.selection = -1;
+  select.appendChild(ele);
+});
