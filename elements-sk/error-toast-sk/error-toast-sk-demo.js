@@ -13,8 +13,6 @@
 // limitations under the License.
 import '../styles/buttons'
 
-import { errorMessage } from './errorMessage'
-
-import './index.js'
+import { errorMessage } from './index.js'
 
 document.getElementById('test_error_toast').addEventListener('click', e => errorMessage('Testing'));
