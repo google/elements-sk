@@ -17,8 +17,22 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-import { IconSk } from './base';
+(function(){
+	const iconSkTemplate = document.createElement('template');
+	let init = false;
 
-window.customElements.define('view-list-icon-sk', class extends IconSk {
-  static get _svg() { return '<path d="M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"/>'; }
-});
+	window.customElements.define('view-list-icon-sk', class extends HTMLElement {
+		constructor() {
+			super()
+			if (!init) {
+				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"/></svg>';
+				init = true;
+			}
+		}
+
+		connectedCallback() {
+			let icon = iconSkTemplate.content.cloneNode(true);
+			this.appendChild(icon);
+		}
+	});
+})();

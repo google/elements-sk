@@ -17,8 +17,22 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-import { IconSk } from './base';
+(function(){
+	const iconSkTemplate = document.createElement('template');
+	let init = false;
 
-window.customElements.define('equalizer-icon-sk', class extends IconSk {
-  static get _svg() { return '<path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"/>'; }
-});
+	window.customElements.define('equalizer-icon-sk', class extends HTMLElement {
+		constructor() {
+			super()
+			if (!init) {
+				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"/></svg>';
+				init = true;
+			}
+		}
+
+		connectedCallback() {
+			let icon = iconSkTemplate.content.cloneNode(true);
+			this.appendChild(icon);
+		}
+	});
+})();

@@ -160,11 +160,25 @@ var ICON_SK_TEMPLATE = template.Must(template.New("icon-sk").Parse(`/* This is a
  *  limitations under the License.
  */
 import './icon-sk.css';
-import { IconSk } from './base';
+(function(){
+	const iconSkTemplate = document.createElement('template');
+	let init = false;
 
-window.customElements.define('{{.Name}}-icon-sk', class extends IconSk {
-  static get _svg() { return '{{ .Content }}'; }
-});`))
+	window.customElements.define('{{.Name}}-icon-sk', class extends HTMLElement {
+		constructor() {
+			super()
+			if (!init) {
+				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24">{{ .Content }}</svg>';
+				init = true;
+			}
+		}
+
+		connectedCallback() {
+			let icon = iconSkTemplate.content.cloneNode(true);
+			this.appendChild(icon);
+		}
+	});
+})();`))
 
 type htmlStruct struct {
 	Icons map[string][]string // maps category -> examples where examples are just the prefix.
