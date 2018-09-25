@@ -17,22 +17,13 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-(function(){
-	const iconSkTemplate = document.createElement('template');
-	let init = false;
 
-	window.customElements.define('local-airport-icon-sk', class extends HTMLElement {
-		constructor() {
-			super()
-			if (!init) {
-				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>';
-				init = true;
-			}
-		}
+const iconSkTemplate = document.createElement('template');
+iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>';
 
-		connectedCallback() {
-			let icon = iconSkTemplate.content.cloneNode(true);
-			this.appendChild(icon);
-		}
-	});
-})();
+window.customElements.define('local-airport-icon-sk', class extends HTMLElement {
+	connectedCallback() {
+		let icon = iconSkTemplate.content.cloneNode(true);
+		this.appendChild(icon);
+	}
+});

@@ -17,22 +17,13 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-(function(){
-	const iconSkTemplate = document.createElement('template');
-	let init = false;
 
-	window.customElements.define('flash-off-icon-sk', class extends HTMLElement {
-		constructor() {
-			super()
-			if (!init) {
-				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M3.27 3L2 4.27l5 5V13h3v9l3.58-6.14L17.73 20 19 18.73 3.27 3zM17 10h-4l4-8H7v2.18l8.46 8.46L17 10z"/></svg>';
-				init = true;
-			}
-		}
+const iconSkTemplate = document.createElement('template');
+iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M3.27 3L2 4.27l5 5V13h3v9l3.58-6.14L17.73 20 19 18.73 3.27 3zM17 10h-4l4-8H7v2.18l8.46 8.46L17 10z"/></svg>';
 
-		connectedCallback() {
-			let icon = iconSkTemplate.content.cloneNode(true);
-			this.appendChild(icon);
-		}
-	});
-})();
+window.customElements.define('flash-off-icon-sk', class extends HTMLElement {
+	connectedCallback() {
+		let icon = iconSkTemplate.content.cloneNode(true);
+		this.appendChild(icon);
+	}
+});

@@ -17,22 +17,13 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-(function(){
-	const iconSkTemplate = document.createElement('template');
-	let init = false;
 
-	window.customElements.define('landscape-icon-sk', class extends HTMLElement {
-		constructor() {
-			super()
-			if (!init) {
-				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>';
-				init = true;
-			}
-		}
+const iconSkTemplate = document.createElement('template');
+iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/></svg>';
 
-		connectedCallback() {
-			let icon = iconSkTemplate.content.cloneNode(true);
-			this.appendChild(icon);
-		}
-	});
-})();
+window.customElements.define('landscape-icon-sk', class extends HTMLElement {
+	connectedCallback() {
+		let icon = iconSkTemplate.content.cloneNode(true);
+		this.appendChild(icon);
+	}
+});

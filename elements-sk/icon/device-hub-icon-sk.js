@@ -17,22 +17,13 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-(function(){
-	const iconSkTemplate = document.createElement('template');
-	let init = false;
 
-	window.customElements.define('device-hub-icon-sk', class extends HTMLElement {
-		constructor() {
-			super()
-			if (!init) {
-				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M17 16l-4-4V8.82C14.16 8.4 15 7.3 15 6c0-1.66-1.34-3-3-3S9 4.34 9 6c0 1.3.84 2.4 2 2.82V12l-4 4H3v5h5v-3.05l4-4.2 4 4.2V21h5v-5h-4z"/></svg>';
-				init = true;
-			}
-		}
+const iconSkTemplate = document.createElement('template');
+iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M17 16l-4-4V8.82C14.16 8.4 15 7.3 15 6c0-1.66-1.34-3-3-3S9 4.34 9 6c0 1.3.84 2.4 2 2.82V12l-4 4H3v5h5v-3.05l4-4.2 4 4.2V21h5v-5h-4z"/></svg>';
 
-		connectedCallback() {
-			let icon = iconSkTemplate.content.cloneNode(true);
-			this.appendChild(icon);
-		}
-	});
-})();
+window.customElements.define('device-hub-icon-sk', class extends HTMLElement {
+	connectedCallback() {
+		let icon = iconSkTemplate.content.cloneNode(true);
+		this.appendChild(icon);
+	}
+});

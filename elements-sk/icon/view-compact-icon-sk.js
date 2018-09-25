@@ -17,22 +17,13 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-(function(){
-	const iconSkTemplate = document.createElement('template');
-	let init = false;
 
-	window.customElements.define('view-compact-icon-sk', class extends HTMLElement {
-		constructor() {
-			super()
-			if (!init) {
-				iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M3 19h6v-7H3v7zm7 0h12v-7H10v7zM3 5v6h19V5H3z"/></svg>';
-				init = true;
-			}
-		}
+const iconSkTemplate = document.createElement('template');
+iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M3 19h6v-7H3v7zm7 0h12v-7H10v7zM3 5v6h19V5H3z"/></svg>';
 
-		connectedCallback() {
-			let icon = iconSkTemplate.content.cloneNode(true);
-			this.appendChild(icon);
-		}
-	});
-})();
+window.customElements.define('view-compact-icon-sk', class extends HTMLElement {
+	connectedCallback() {
+		let icon = iconSkTemplate.content.cloneNode(true);
+		this.appendChild(icon);
+	}
+});
