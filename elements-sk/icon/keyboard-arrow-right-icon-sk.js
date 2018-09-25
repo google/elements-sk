@@ -17,8 +17,13 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-import { IconSk } from './base';
 
-window.customElements.define('keyboard-arrow-right-icon-sk', class extends IconSk {
-  static get _svg() { return '<path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>'; }
+const iconSkTemplate = document.createElement('template');
+iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>';
+
+window.customElements.define('keyboard-arrow-right-icon-sk', class extends HTMLElement {
+	connectedCallback() {
+		let icon = iconSkTemplate.content.cloneNode(true);
+		this.appendChild(icon);
+	}
 });

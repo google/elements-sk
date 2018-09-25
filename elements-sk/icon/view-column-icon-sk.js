@@ -17,8 +17,13 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
-import { IconSk } from './base';
 
-window.customElements.define('view-column-icon-sk', class extends IconSk {
-  static get _svg() { return '<path d="M10 18h5V5h-5v13zm-6 0h5V5H4v13zM16 5v13h5V5h-5z"/>'; }
+const iconSkTemplate = document.createElement('template');
+iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M10 18h5V5h-5v13zm-6 0h5V5H4v13zM16 5v13h5V5h-5z"/></svg>';
+
+window.customElements.define('view-column-icon-sk', class extends HTMLElement {
+	connectedCallback() {
+		let icon = iconSkTemplate.content.cloneNode(true);
+		this.appendChild(icon);
+	}
 });
