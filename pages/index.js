@@ -35,7 +35,7 @@ import 'elements-sk/icon/link-icon-sk';
 import 'elements-sk/icon/menu-icon-sk';
 import 'elements-sk/icon/warning-icon-sk';
 
-import { errorMessage } from 'elements-sk/error-toast-sk';
+import { errorMessage } from 'elements-sk/errorMessage';
 
 document.getElementById('make_error').addEventListener('click', () => {
 	errorMessage('Oh no, there was a problem!', 4000 /* ms*/);
