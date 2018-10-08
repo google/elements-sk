@@ -36,6 +36,12 @@ module.exports = function(config) {
       'elements-sk/**/*_test.js',
     ],
 
+    // Work-around for karma-webpack issues:
+    // https://github.com/webpack-contrib/karma-webpack/issues/322#issuecomment-417862717
+    output: {
+      filename: '[name]',
+    },
+
     preprocessors: {
       // add webpack as preprocessor
       'elements-sk/**/*_test.js': [ 'webpack' ],
