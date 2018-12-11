@@ -1,3 +1,5 @@
+@import url(../colors.css);
+
 radio-sk {
   display: block;
   margin: 0.4em;
@@ -14,10 +16,10 @@ radio-sk label {
 
 radio-sk .box {
   margin-right: 0.4em;
-  border: 4px solid #175A87;
+  border: 4px solid var(--blue);
   width: 16px;
   height: 16px;
-  background: white;
+  background: var(--white);
   border-radius: 50%;
 }
 
@@ -28,24 +30,24 @@ radio-sk input {
 }
 
 radio-sk input:checked + .box {
-  background: #1F78B4;
+  background: var(--blue);
 }
 
 radio-sk input:focus + .box {
-  outline: dotted thick #175A87;
+  outline: dotted thick var(--blue);
   outline-offset: 1px;
 }
 
 radio-sk:hover .box {
-  background: #eee;
+  background: var(--dark-white);
 }
 
 radio-sk input:checked:hover + .box {
-  background: #777;
+  background: var(--gray);
 }
 
 radio-sk input:checked + .box {
-  background: #175A87;
+  background: var(--blue);
 }
 
 radio-sk[hidden] {
@@ -53,12 +55,12 @@ radio-sk[hidden] {
 }
 
 radio-sk input:disabled + .box {
-  border: 4px solid #757575;
-  background: white;
+  border: 4px solid var(--gray);
+  background: var(--white);
 }
 
 radio-sk input:disabled:checked + .box {
-  border: 4px solid #757575;
-  background: #757575;
-  color: #757575;
+  border: 4px solid var(--gray);
+  background: var(--gray);
+  color: var(gray);
 }

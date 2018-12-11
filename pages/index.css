@@ -1,0 +1,16 @@
+* {
+  font-family: sans-serif;
+}
+
+h2 {
+  margin: 0.6em 0;
+}
+
+body {
+  padding: 2em;
+}
+
+select-sk, multi-select-sk {
+  border: 1px solid grey;
+  margin: 3px;
+}

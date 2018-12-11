@@ -131,6 +131,9 @@ window.customElements.define('select-sk', class extends HTMLElement {
   // Loop over all immediate child elements and make sure at most only one is selected.
   _rationalize() {
     for (let i = 0; i < this.children.length; i++) {
+      if (this.children[i].getAttribute('tabindex') == null) {
+        this.children[i].setAttribute('tabindex', '0');
+      }
       if (this._selection === i) {
         this.children[i].setAttribute('selected', '');
       } else {

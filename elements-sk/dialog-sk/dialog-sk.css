@@ -1,6 +1,8 @@
+@import url(../colors.css);
+
 dialog-sk {
   display: none;
-  background: white;
+  background: var(--white);
   position: fixed;
   top: 50%;
   max-height: 80%;
@@ -9,9 +11,9 @@ dialog-sk {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 16px;
-  box-shadow: 2px 2px 4px grey;
+  box-shadow: 2px 2px 4px var(--gray);
   overflow-y: auto;
-  border: solid 1px lightgray;
+  border: solid 1px var(--light-gray);
 }
 
 dialog-sk[shown] {

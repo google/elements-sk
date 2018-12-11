@@ -1,9 +1,11 @@
+@import url(../colors.css);
+
 nav-links-sk {
   display: none;
   position: absolute;
   z-index: 200;
-  background: white;
-  border: solid 1px lightgrey;
+  background: var(--white);
+  border: solid 1px var(--light-gray);
   margin-left: 16px;
 }
 
@@ -14,10 +16,10 @@ nav-links-sk[shown] {
 nav-links-sk a {
   display: block;
   padding: 12px;
-  color: #175A87;
-  fill: #175A87;
+  color: var(--blue);
+  fill: var(--blue);
 }
 
 nav-links-sk a:hover {
-  background: lightgrey;
+  background: var(--light-gray);
 }

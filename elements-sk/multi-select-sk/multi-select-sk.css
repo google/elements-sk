@@ -1,7 +1,44 @@
+@import url(../colors.css);
+
+multi-select-sk,
+multi-select-sk > * {
+  padding: 0.6em;
+  background-color: var(--white);
+  border: none;
+  outline: none;
+  line-height: 20px;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
 multi-select-sk {
+  border: solid 1px var(--light-blue);
   display: block;
 }
 
+
 multi-select-sk > [selected] {
-  background: lightgray;
+  background: var(--light-gray);
 }
+
+multi-select-sk > *:focus,
+multi-select-sk:focus {
+  border: solid 1px var(--light-gray);
+  outline: dotted thick var(--blue);
+  outline-offset: 1px;
+}
+
+multi-select-sk > *:hover {
+  background-color: var(--dark-white);
+}
+
+multi-select-sk > *:focus {
+  background-color: var(--dark-white);
+  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+multi-select-sk > *[selected] {
+  background-color: var(--light-blue);
+  color: var(--blue);
+}
+

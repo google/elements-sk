@@ -1,10 +1,11 @@
+@import url(../../colors.css);
 /*
  * Styles for select and options to make them look better.
  */
 select,
 option {
   padding: 0.6em;
-  background-color: white;
+  background-color: var(--white);
   border: none;
   outline: none;
   line-height: 20px;
@@ -13,29 +14,29 @@ option {
 }
 
 select {
-  border: solid 1px #A6CEE3;
+  border: solid 1px var(--light-blue);
   margin: 0.6em;
 }
 
 select option:focus,
 select:focus {
-  border: solid 1px lightgray;
-  outline: dotted thick #1F78B4;
+  border: solid 1px var(--light-gray);
+  outline: dotted thick var(--blue);
   outline-offset: 1px;
 }
 
 option:hover {
-  background-color: #ddd;
+  background-color: var(--dark-white);
 }
 
 option:focus {
-  background-color: #ddd;
+  background-color: var(--dark-white);
   transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 option:checked {
-  background-color: #A6CEE3;
-  color: #1F78B4;
+  background-color: var(--light-blue);
+  color: var(--blue);
 }
 
 select {
