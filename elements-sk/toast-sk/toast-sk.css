@@ -1,12 +1,14 @@
+@import url(../colors.css);
+
 toast-sk {
   display: block;
   visibility: hidden;
   position: fixed;
   left: 10px;
   bottom: 0;
-  color: #FFF;
-  fill: #FFF;
-  background: #175A87;
+  color: var(--white);
+  fill: var(--white);
+  background: var(--blue);
   border-radius: 4px;
   padding: 10px 15px;
   opacity: 0;

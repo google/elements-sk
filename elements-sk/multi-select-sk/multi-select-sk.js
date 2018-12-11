@@ -134,6 +134,9 @@ window.customElements.define('multi-select-sk', class extends HTMLElement {
     // assume this.selection is sorted when this is called.
     let s = 0;
     for (let i = 0; i < this.children.length; i++) {
+      if (this.children[i].getAttribute('tabindex') == null) {
+        this.children[i].setAttribute('tabindex', '0');
+      }
       if (this._selection[s] === i) {
         this.children[i].setAttribute('selected', '');
         s++;

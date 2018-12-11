@@ -12,6 +12,9 @@ module.exports = function(config) {
   webpackConfig.entry = null;
   webpackConfig.mode = 'development';
 
+  // Secret sause to get webpack-karma working.
+  delete webpackConfig.output;
+
   config.set({
 
     // base path, that will be used to resolve files and exclude
