@@ -76,7 +76,7 @@ describe('select-sk', function() {
       });
     });
 
-    it('treats null and undefined as -1', function() {
+    it('treats null and undefined and out of range as -1', function() {
       return window.customElements.whenDefined('select-sk').then(() => {
         container.innerHTML = `
         <select-sk id=select>
@@ -94,6 +94,12 @@ describe('select-sk', function() {
         assert.isTrue(s.querySelector('#a').hasAttribute('selected'));
 
         s.selection = undefined;
+        assert.equal(-1, s.selection);
+
+        s.selection = 10;
+        assert.equal(-1, s.selection);
+
+        s.selection = -3;
         assert.equal(-1, s.selection);
       });
     });
@@ -131,10 +137,12 @@ describe('select-sk', function() {
         let s = container.firstElementChild;
         assert.equal(1, s._selection);
         assert.equal(1, s.selection);
+        assert.equal('0', s.getAttribute('tabindex'));
         s.disabled = true;
         s.selection = 0;
         assert.equal(1, s._selection);
         assert.equal(1, s.selection);
+        assert.equal(false, s.hasAttribute('tabindex'));
       });
     });
 
@@ -167,16 +175,23 @@ describe('select-sk', function() {
         </select>
         `;
         let s = container.firstElementChild;
+        assert.equal('listbox', s.getAttribute('role'));
         let a = s.querySelector('#a');
         let b = s.querySelector('#b');
         a.click();
         assert.equal(0, s.selection);
         assert.isTrue(a.hasAttribute('selected'));
+        assert.equal('true', a.getAttribute('aria-selected'));
+        assert.equal('option', a.getAttribute('role'));
         assert.isFalse(b.hasAttribute('selected'));
+        assert.equal('false', b.getAttribute('aria-selected'));
+        assert.equal('option', b.getAttribute('role'));
         b.click();
         assert.equal(1, s.selection);
         assert.isFalse(a.hasAttribute('selected'));
+        assert.equal('false', a.getAttribute('aria-selected'));
         assert.isTrue(b.hasAttribute('selected'));
+        assert.equal('true', b.getAttribute('aria-selected'));
       });
     });
 
@@ -274,5 +289,49 @@ describe('select-sk', function() {
       });
     });
   }); // end describe('mutation of child selected attribute'
+
+  describe('keyboard navigation', function() {
+    it('follows arrow keys', function() {
+      return window.customElements.whenDefined('select-sk').then(() => {
+        container.innerHTML = `
+        <select-sk id=select>
+          <div></div>
+          <div></div>
+          <div id=d2 selected></div>
+        </select>`;
+        let s = container.firstElementChild;
+        assert.equal(2, s.selection);
+        s._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp', }));
+        assert.equal(1, s.selection);
+        s._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown', }));
+        assert.equal(2, s.selection);
+        s._onKeyDown(new KeyboardEvent('keydown', { key: 'Home', }));
+        assert.equal(0, s.selection);
+        s._onKeyDown(new KeyboardEvent('keydown', { key: 'End', }));
+        assert.equal(2, s.selection);
+        // Don't wrap around.
+        s._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown', }));
+        assert.equal(2, s.selection);
+      });
+    });
+  }); // end describe('keyboard navigation')
+
+  describe('focus', function() {
+    it('drops focus when disabled', function() {
+      return window.customElements.whenDefined('select-sk').then(() => {
+        container.innerHTML = `
+        <select-sk id=select>
+          <div></div>
+          <div></div>
+          <div id=d2 selected></div>
+        </select>`;
+        let s = container.firstElementChild;
+        s.focus();
+        assert.equal(s, document.activeElement);
+        s.disabled = true;
+        assert.notEqual(s, document.activeElement);
+      });
+    });
+  }); // end describe('focus')
 
 });
