@@ -12,7 +12,7 @@ button {
   outline: none;
   border-radius: 4px;
   padding: 0.6em 1.2em;
-  border: solid lightgray 2px;
+  border: solid lightgray 1px;
   margin: 0.6em;
   height: 3em;
   transition: box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
@@ -53,14 +53,14 @@ button.action {
   color: var(--white);
   fill: var(--white);
   background: var(--blue);
-  border: solid rgba(0,0,0,0) 2px;
+  border: solid rgba(0,0,0,0) 1px;
 }
 
 button.action:disabled {
   color: var(--white);
   fill: var(--white);
   background: var(--gray);
-  border: solid rgba(0,0,0,0) 2px;
+  border: solid rgba(0,0,0,0) 1px;
 }
 
 button.fab {
