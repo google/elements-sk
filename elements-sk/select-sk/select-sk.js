@@ -104,7 +104,11 @@ window.customElements.define('select-sk', class extends HTMLElement {
     if (val === undefined || val === null) {
       val = -1;
     }
-    this._selection = +val;
+    let numVal = +val;
+    if (numVal < 0 || numVal > this.children.length) {
+      numVal = -1;
+    }
+    this._selection = numVal;
     this._rationalize();
   }
 
@@ -129,13 +133,17 @@ window.customElements.define('select-sk', class extends HTMLElement {
     }
     this._rationalize();
     if (oldIndex != this._selection) {
-      this.dispatchEvent(new CustomEvent('selection-changed', {
-        detail: {
-          selection: this._selection,
-        },
-        bubbles: true,
-      }));
+      this._emitEvent();
     }
+  }
+
+  _emitEvent() {
+    this.dispatchEvent(new CustomEvent('selection-changed', {
+      detail: {
+        selection: this._selection,
+      },
+      bubbles: true,
+    }));
   }
 
   // Loop over all immediate child elements and make sure at most only one is selected.
@@ -177,17 +185,14 @@ window.customElements.define('select-sk', class extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
+    // Only handling 'disabled'.
     const hasValue = newValue !== null;
-    switch (name) {
-      case 'disabled':
-        this.setAttribute('aria-disabled', hasValue);
-        if (hasValue) {
-          this.removeAttribute('tabindex');
-          this.blur();
-        } else {
-          this.setAttribute('tabindex', '0');
-        }
-        break;
+    this.setAttribute('aria-disabled', hasValue);
+    if (hasValue) {
+      this.removeAttribute('tabindex');
+      this.blur();
+    } else {
+      this.setAttribute('tabindex', '0');
     }
   }
 
@@ -195,42 +200,30 @@ window.customElements.define('select-sk', class extends HTMLElement {
     if (e.altKey)
       return;
     let oldIndex = this._selection;
-    switch (e.keyCode) {
-      case 40: // Down arrow.
+    switch (e.key) {
+      case 'ArrowDown':
         if (this.selection < this.children.length - 1) {
           this.selection = this.selection + 1;
         }
         e.preventDefault();
-        e.stopPropagation();
         break;
-      case 38: // Up arrow.
+      case 'ArrowUp':
         if (this.selection > 0) {
           this.selection = this.selection - 1;
         }
         e.preventDefault();
-        e.stopPropagation();
         break;
-      case 36: // Home.
+      case 'Home':
         this.selection = 0;
         e.preventDefault();
-        e.stopPropagation();
         break;
-      case 35: // End.
+      case 'End':
         this.selection = this.children.length-1;
         e.preventDefault();
-        e.stopPropagation();
         break;
     }
-    // TODO Remove duplication.
     if (oldIndex != this._selection) {
-      this.dispatchEvent(new CustomEvent('selection-changed', {
-        detail: {
-          selection: this._selection,
-        },
-        bubbles: true,
-      }));
+      this._emitEvent();
     }
   }
-
-
 });
