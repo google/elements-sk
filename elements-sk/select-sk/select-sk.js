@@ -36,6 +36,8 @@
  *     <div></div>
  *   </select-sk>
  *
+ * @attr disabled - Indicates whether the element is disabled.
+ *
  * @evt selection-changed - Sent when an item is clicked and the selection is changed.
  *   The detail of the event contains the child element index:
  *
@@ -49,6 +51,10 @@
 import { upgradeProperty } from '../upgradeProperty'
 
 window.customElements.define('select-sk', class extends HTMLElement {
+  static get observedAttributes() {
+    return ['disabled'];
+  }
+
   constructor() {
     super();
     // Keep _selection up to date by monitoring DOM changes.
@@ -60,6 +66,7 @@ window.customElements.define('select-sk', class extends HTMLElement {
     upgradeProperty(this, 'selection');
     upgradeProperty(this, 'disabled');
     this.addEventListener('click', this._click);
+    this.addEventListener('keydown', this._onKeyDown);
     this._obs.observe(this, {
       childList: true,
     });
@@ -68,17 +75,20 @@ window.customElements.define('select-sk', class extends HTMLElement {
 
   disconnectedCallback() {
     this.removeEventListener('click', this._click);
+    this.removeEventListener('keydown', this._onKeyDown);
     this._obs.disconnect();
   }
 
-  /** @prop {Boolean} disabled - whether this element should respond to input.*/
+  /** @prop {Boolean} disabled - This mirrors the disabled attribute. */
   get disabled() { return this.hasAttribute('disabled'); }
   set disabled(val) {
     if (!!val) {
       this.setAttribute('disabled', '');
+      this.setAttribute('aria-disabled', 'true');
       this.selection = -1;
     } else {
       this.removeAttribute('disabled');
+      this.setAttribute('aria-disabled', 'false');
       this._bubbleUp();
     }
   }
@@ -130,14 +140,23 @@ window.customElements.define('select-sk', class extends HTMLElement {
 
   // Loop over all immediate child elements and make sure at most only one is selected.
   _rationalize() {
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'listbox');
+    }
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', '0');
+    }
     for (let i = 0; i < this.children.length; i++) {
-      if (this.children[i].getAttribute('tabindex') == null) {
-        this.children[i].setAttribute('tabindex', '0');
+      let child = this.children[i];
+      if (!child.hasAttribute('role')) {
+        child.setAttribute('role', 'option');
       }
       if (this._selection === i) {
-        this.children[i].setAttribute('selected', '');
+        child.setAttribute('selected', '');
+        child.setAttribute('aria-selected', 'true');
       } else {
-        this.children[i].removeAttribute('selected');
+        child.removeAttribute('selected');
+        child.setAttribute('aria-selected', 'false');
       }
     }
   }
@@ -156,4 +175,62 @@ window.customElements.define('select-sk', class extends HTMLElement {
     }
     this._rationalize();
   }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    const hasValue = newValue !== null;
+    switch (name) {
+      case 'disabled':
+        this.setAttribute('aria-disabled', hasValue);
+        if (hasValue) {
+          this.removeAttribute('tabindex');
+          this.blur();
+        } else {
+          this.setAttribute('tabindex', '0');
+        }
+        break;
+    }
+  }
+
+  _onKeyDown(e) {
+    if (e.altKey)
+      return;
+    let oldIndex = this._selection;
+    switch (e.keyCode) {
+      case 40: // Down arrow.
+        if (this.selection < this.children.length - 1) {
+          this.selection = this.selection + 1;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        break;
+      case 38: // Up arrow.
+        if (this.selection > 0) {
+          this.selection = this.selection - 1;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        break;
+      case 36: // Home.
+        this.selection = 0;
+        e.preventDefault();
+        e.stopPropagation();
+        break;
+      case 35: // End.
+        this.selection = this.children.length-1;
+        e.preventDefault();
+        e.stopPropagation();
+        break;
+    }
+    // TODO Remove duplication.
+    if (oldIndex != this._selection) {
+      this.dispatchEvent(new CustomEvent('selection-changed', {
+        detail: {
+          selection: this._selection,
+        },
+        bubbles: true,
+      }));
+    }
+  }
+
+
 });
