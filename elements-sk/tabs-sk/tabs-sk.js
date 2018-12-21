@@ -40,6 +40,8 @@
  *   </div>
  * </tabs-panel-sk>
  *
+ * @attr selected - The index of the selected tab.
+ *
  * @evt tab-selected-sk - Event sent when the user clicks on a tab. The events
  *        value of detail.index is the index of the selected tab.
  *
@@ -47,6 +49,10 @@
 import { upgradeProperty } from '../upgradeProperty';
 
 window.customElements.define('tabs-sk', class extends HTMLElement {
+  static get observedAttributes() {
+    return ['selected'];
+  }
+
   constructor() {
     super();
   }
@@ -64,13 +70,14 @@ window.customElements.define('tabs-sk', class extends HTMLElement {
     e.stopPropagation();
     this.querySelectorAll('button').forEach((ele, i) => {
       if (ele === e.target) {
-        ele.classList.add('selected');
-        this._trigger(i, true);
-      } else {
-        ele.classList.remove('selected');
+        this.select(i, true);
       }
     });
   }
+
+    /** @prop selected {string} - Reflects the 'selected' attribute.  */
+    get selected() { return this.getAttribute('selected'); }
+    set selected(val) { this.setAttribute('selected', +val); }
 
   /**
    * Force the selection of a tab
@@ -79,6 +86,7 @@ window.customElements.define('tabs-sk', class extends HTMLElement {
    * @param {boolean} [trigger=false] If true then trigger the 'tab-selected-sk' event.
    */
   select(index, trigger=false) {
+    this.setAttribute('selected', index)
     this.querySelectorAll('button').forEach((ele, i) => {
       ele.classList.toggle('selected', i === index);
     });
@@ -92,5 +100,12 @@ window.customElements.define('tabs-sk', class extends HTMLElement {
     if (this.nextElementSibling.tagName === 'TABS-PANEL-SK') {
       this.nextElementSibling.setAttribute('selected', index);
     }
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (oldValue == newValue) {
+      return
+    }
+    this.select(+newValue, false);
   }
 });
