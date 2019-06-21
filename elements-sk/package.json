@@ -1,13 +1,13 @@
 {
   "name": "elements-sk",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "private": false,
   "description": "A set of light-weight custom elements with a uniform style.",
   "main": "index.js",
   "homepage": "https://github.com/google/elements-sk/",
   "repository": "https://github.com/google/elements-sk.git",
-  "publishConfig":{
-    "registry":"https://wombat-dressing-room.appspot.com/elements-sk/_ns/"
+  "publishConfig": {
+    "registry": "https://wombat-dressing-room.appspot.com/elements-sk/_ns/"
   },
   "license": "Apache-2.0"
 }
