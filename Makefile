@@ -1,8 +1,9 @@
 default:
-	npx webpack --mode=development
+	npx webpack-cli --mode=development
 
 release:
-	npx webpack --mode=production
+	npm ci
+	npx webpack-cli --mode=production
 
 serve:
 	npx webpack-dev-server --mode=production --content-base ./dist --watch-poll
