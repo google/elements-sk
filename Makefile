@@ -12,8 +12,11 @@ test:
 	# Run the generated tests just once under Xvfb.
 	xvfb-run --auto-servernum --server-args "-screen 0 1280x1024x24" npx karma start --single-run
 
+login:
+	npm login --registry https://wombat-dressing-room.appspot.com/elements-sk/_ns
+
 publish:
-	cd elements-sk; npm publish
+	cd elements-sk; npm publish --registry https://wombat-dressing-room.appspot.com/elements-sk/_ns
 
 update-major:
 	cd elements-sk; npm version major
