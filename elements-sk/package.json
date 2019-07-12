@@ -1,6 +1,6 @@
 {
   "name": "elements-sk",
-  "version": "2.7.3",
+  "version": "2.7.4",
   "private": false,
   "description": "A set of light-weight custom elements with a uniform style.",
   "main": "index.js",
