@@ -64,6 +64,15 @@ export class CheckOrRadio extends HTMLElement {
     upgradeProperty(this, 'disabled');
     upgradeProperty(this, 'name');
     upgradeProperty(this, 'label');
+    // Since attributeChangedCallback can be called before connectedCallback,
+    // and we have non-trivial actions when the attributes change to reflect
+    // the values to this._input, we need trigger each setter on
+    // connectedCallback.
+    this.checked = this.checked;
+    this.disabled = this.disabled;
+    this.name = this.name;
+    this.label = this.label;
+
     this._input.checked = this.checked;
     this._input.disabled = this.disabled;
     this._input.setAttribute('name', this.getAttribute('name'));
@@ -94,16 +103,15 @@ export class CheckOrRadio extends HTMLElement {
     }
   }
 
-  get name() { return this._input.getAttribute('name'); }
+  get name() { return this.getAttribute('name'); }
   set name(val) {
     this.setAttribute('name', val);
     this._input.setAttribute('name', val);
   }
 
-  get label() { return this._input.getAttribute('label'); }
+  get label() { return this.getAttribute('label'); }
   set label(val) {
     this.setAttribute('label', val);
-    this._input.setAttribute('label', val);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
