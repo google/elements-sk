@@ -7,7 +7,7 @@
   "homepage": "https://github.com/google/elements-sk/",
   "repository": "https://github.com/google/elements-sk.git",
   "publishConfig": {
-    "registry": "https://wombat-dressing-room.appspot.com/elements-sk/_ns/"
+    "registry": "https://wombat-dressing-room.appspot.com/elements-sk/_ns"
   },
   "license": "Apache-2.0"
 }
