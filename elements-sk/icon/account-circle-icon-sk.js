@@ -24,6 +24,9 @@ iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/20
 window.customElements.define('account-circle-icon-sk', class extends HTMLElement {
 	connectedCallback() {
 		let icon = iconSkTemplate.content.cloneNode(true);
+    while (this.firstChild) {
+      this.removeChild(this.firstChild);
+    }
 		this.appendChild(icon);
 	}
 });
