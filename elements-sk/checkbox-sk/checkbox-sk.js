@@ -79,7 +79,7 @@ export class CheckOrRadio extends HTMLElement {
     this._label.textContent = this.getAttribute('label');
     // TODO(jcgregorio) Do we capture and alter the 'input' and 'change' events generated
     // by the input element so that the evt.target points to 'this'?
-    this.addEventListener('change', (e) => {
+    this._input.addEventListener('change', (e) => {
       this.checked = e.target.checked;
     });
   }
