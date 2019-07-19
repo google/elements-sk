@@ -82,6 +82,14 @@ export class CheckOrRadio extends HTMLElement {
     this._input.addEventListener('change', (e) => {
       this.checked = e.target.checked;
     });
+    this.addEventListener('click', (e) => {
+      if (e.target == this) {
+        if (this.checked && this._role === 'radio') {
+          return
+        }
+        this.checked = !this.checked;
+      }
+    });
   }
 
   get checked() { return this.hasAttribute('checked'); }
