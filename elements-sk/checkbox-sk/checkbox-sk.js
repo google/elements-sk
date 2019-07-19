@@ -87,7 +87,7 @@ export class CheckOrRadio extends HTMLElement {
         if (this.checked && this._role === 'radio') {
           return
         }
-        this.checked = !this.checked;
+        this._input.click();
       }
     });
   }

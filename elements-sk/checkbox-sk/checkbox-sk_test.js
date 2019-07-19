@@ -40,8 +40,14 @@ describe('checkbox-sk', function() {
   it('responds to click()', function() {
     return _checkBoxSetup().then((cb) => {
       assert.isFalse(cb.checked);
+
+      let called = false;
+      cb.addEventListener('change', (e) => { called = true; })
+
       cb.click();
+      assert.isTrue(called);
       assert.isTrue(cb.checked);
+
       cb.click();
       assert.isFalse(cb.checked);
     });
@@ -52,7 +58,12 @@ describe('radio-sk', function() {
   it('responds to click()', function() {
     return _radioSetup().then((rb) => {
       assert.isFalse(rb.checked);
+
+      let called = false;
+      rb.addEventListener('change', (e) => { called = true; })
+
       rb.click();
+      assert.isTrue(called);
       assert.isTrue(rb.checked);
       rb.click();
       assert.isTrue(rb.checked);
