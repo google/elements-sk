@@ -73,29 +73,16 @@ window.customElements.define('nav-links-sk', class extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (newValue !== null) {
       window.addEventListener('keydown', this);
-      window.addEventListener('focusin', this);
     } else {
       window.removeEventListener('keydown', this);
-      window.removeEventListener('focusin', this);
       this.dispatchEvent(new CustomEvent('closed', { bubbles: true }));
     }
   }
 
   handleEvent(e) {
-    if (e.type === 'keydown') {
-        if (e.key === "Escape") {
-          e.preventDefault();
-          this.shown = false;
-        }
-    } else {
-      // If focus is not on 'this' or its children then close.
-      let ele = e.target;
-      while (ele !== this && ele !== null) {
-        ele = ele.parentElement;
-      }
-      if (!ele) {
-        this.shown = false;
-      }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      this.shown = false;
     }
   }
 });
