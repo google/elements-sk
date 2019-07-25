@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** @module elements-sk/buttons
+/** @module elements-sk/styles/buttons
  *
  * @description CSS Styling for native buttons.
  * @example

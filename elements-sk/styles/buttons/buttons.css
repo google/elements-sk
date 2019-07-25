@@ -16,7 +16,7 @@ button {
   margin: 0.6em;
   height: 3em;
   transition: box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 2px 2px 8px 0 var(--gray);
+  box-shadow: 2px 2px 2px 0 var(--light-gray);
 }
 
 button:hover {

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** @module elements-sk/select
+/** @module elements-sk/styles/select
  *
  * @description CSS Styling for native select and options elements.
  */
