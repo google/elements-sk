@@ -116,12 +116,18 @@ export class CheckOrRadio extends HTMLElement {
 
   get name() { return this.getAttribute('name'); }
   set name(val) {
+    if (val === null || val === undefined) {
+      return;
+    }
     this.setAttribute('name', val);
     this._input.setAttribute('name', val);
   }
 
   get label() { return this.getAttribute('label'); }
   set label(val) {
+    if (val === null || val === undefined) {
+      return;
+    }
     this.setAttribute('label', val);
   }
 
