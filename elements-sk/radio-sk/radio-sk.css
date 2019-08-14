@@ -34,8 +34,8 @@ radio-sk input:checked + .box {
 }
 
 radio-sk input:focus + .box {
-  outline: dotted thick var(--blue);
-  outline-offset: 1px;
+  outline: dashed 2px var(--blue);
+  outline-offset: 3px;
 }
 
 radio-sk:hover .box {

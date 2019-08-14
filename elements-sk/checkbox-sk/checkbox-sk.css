@@ -34,8 +34,8 @@ checkbox-sk input:checked + .box {
 }
 
 checkbox-sk input:focus + .box {
-  outline: dotted thick var(--blue);
-  outline-offset: 1px;
+  outline: dashed 2px var(--blue);
+  outline-offset: 3px;
 }
 
 checkbox-sk:hover .box {

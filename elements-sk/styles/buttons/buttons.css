@@ -29,7 +29,8 @@ button.action:hover {
 }
 
 button:focus {
-  outline: dotted thick var(--blue);
+  outline: dashed 2px var(--blue);
+  outline-offset: 3px;
 }
 
 button:active {

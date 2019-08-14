@@ -21,8 +21,8 @@ select {
 select option:focus,
 select:focus {
   border: solid 1px var(--light-gray);
-  outline: dotted thick var(--blue);
-  outline-offset: 1px;
+  outline: dashed 2px var(--blue);
+  outline-offset: 3px;
 }
 
 option:hover {
