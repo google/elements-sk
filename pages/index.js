@@ -15,7 +15,6 @@
 // Shows how to import elements when using the library.
 import 'elements-sk/checkbox-sk';
 import 'elements-sk/collapse-sk';
-import 'elements-sk/dialog-sk';
 import 'elements-sk/error-toast-sk';
 import 'elements-sk/multi-select-sk';
 import 'elements-sk/nav-button-sk';
