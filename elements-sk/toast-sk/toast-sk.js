@@ -25,9 +25,10 @@
  *               Defaults to 5000. A value of 0 means to display
  *               forever.
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('toast-sk', class extends HTMLElement {
+define('toast-sk', class extends HTMLElement {
   constructor() {
     super();
     this._timer = null;

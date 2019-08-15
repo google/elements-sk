@@ -46,9 +46,10 @@
  *        value of detail.index is the index of the selected tab.
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty';
 
-window.customElements.define('tabs-sk', class extends HTMLElement {
+define('tabs-sk', class extends HTMLElement {
   static get observedAttributes() {
     return ['selected'];
   }

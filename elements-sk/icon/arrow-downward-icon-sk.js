@@ -17,11 +17,12 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
+import { define } from '../define';
 
 const iconSkTemplate = document.createElement('template');
 iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path fill="#010101" d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/></svg>';
 
-window.customElements.define('arrow-downward-icon-sk', class extends HTMLElement {
+define('arrow-downward-icon-sk', class extends HTMLElement {
 	connectedCallback() {
 		let icon = iconSkTemplate.content.cloneNode(true);
     while (this.firstChild) {

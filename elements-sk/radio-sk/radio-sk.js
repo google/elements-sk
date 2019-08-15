@@ -48,6 +48,7 @@
  */
 
 // Note that we are importing just the class, not the whole element + CSS definition.
+import { define } from '../define'
 import { CheckOrRadio } from '../checkbox-sk/checkbox-sk.js';
 
 class RadioElement extends CheckOrRadio {
@@ -59,4 +60,4 @@ class RadioElement extends CheckOrRadio {
 // and also participate in a native 'radiogroup' element.
 //
 // See documentation for checkbox-sk.
-window.customElements.define('radio-sk', RadioElement);
+define('radio-sk', RadioElement);

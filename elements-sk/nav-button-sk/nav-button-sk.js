@@ -54,9 +54,10 @@
 import '../styles/buttons';
 import '../icon/menu-icon-sk';
 
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('nav-button-sk', class extends HTMLElement {
+define('nav-button-sk', class extends HTMLElement {
   connectedCallback() {
     this.addEventListener('click', this);
     this.innerHTML = `<button><menu-icon-sk></menu-icon-sk></button>`;
