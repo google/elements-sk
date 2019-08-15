@@ -49,9 +49,10 @@
  * </nav-links-sk>
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('nav-links-sk', class extends HTMLElement {
+define('nav-links-sk', class extends HTMLElement {
   static get observedAttributes() {
     return ['shown'];
   }

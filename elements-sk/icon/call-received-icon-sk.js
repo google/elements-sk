@@ -17,11 +17,12 @@
  *  limitations under the License.
  */
 import './icon-sk.css';
+import { define } from '../define';
 
 const iconSkTemplate = document.createElement('template');
 iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/2000/svg" width=24 height=24 viewBox="0 0 24 24"><path d="M20 5.41L18.59 4 7 15.59V9H5v10h10v-2H8.41z"/></svg>';
 
-window.customElements.define('call-received-icon-sk', class extends HTMLElement {
+define('call-received-icon-sk', class extends HTMLElement {
 	connectedCallback() {
 		let icon = iconSkTemplate.content.cloneNode(true);
     while (this.firstChild) {

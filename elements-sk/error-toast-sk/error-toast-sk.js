@@ -40,9 +40,10 @@
  * </footer>
  */
 import 'elements-sk/toast-sk'
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('error-toast-sk', class extends HTMLElement {
+define('error-toast-sk', class extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `<toast-sk></toast-sk>`;
     this._toast = this.firstElementChild;

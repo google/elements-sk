@@ -25,9 +25,10 @@
  *     collapse, i.e., transition to display: none.
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('collapse-sk', class extends HTMLElement {
+define('collapse-sk', class extends HTMLElement {
   connectedCallback() {
     upgradeProperty(this, 'closed');
   }

@@ -47,6 +47,7 @@
  * @prop {string} label This mirrors the label attribute.
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
 export class CheckOrRadio extends HTMLElement {
@@ -155,4 +156,4 @@ export class CheckOrRadio extends HTMLElement {
   }
 }
 
-window.customElements.define('checkbox-sk', CheckOrRadio);
+define('checkbox-sk', CheckOrRadio);

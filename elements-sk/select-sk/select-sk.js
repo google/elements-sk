@@ -48,9 +48,10 @@
  *   </pre>
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('select-sk', class extends HTMLElement {
+define('select-sk', class extends HTMLElement {
   static get observedAttributes() {
     return ['disabled'];
   }

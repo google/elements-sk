@@ -23,9 +23,10 @@
  * @attr selected - The index of the tab panel to display.
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty';
 
-window.customElements.define('tabs-panel-sk', class extends HTMLElement {
+define('tabs-panel-sk', class extends HTMLElement {
   static get observedAttributes() {
     return ['selected'];
   }

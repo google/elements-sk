@@ -47,9 +47,10 @@
  *   </pre>
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('multi-select-sk', class extends HTMLElement {
+define('multi-select-sk', class extends HTMLElement {
   constructor() {
     super();
     // Keep _selection up to date by monitoring DOM changes.

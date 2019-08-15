@@ -23,9 +23,10 @@
  * @attr active - Boolean attribute, if present, spinner is active.
  *
  */
+import { define } from '../define'
 import { upgradeProperty } from '../upgradeProperty'
 
-window.customElements.define('spinner-sk', class extends HTMLElement {
+define('spinner-sk', class extends HTMLElement {
   // TODO(jcgregorio) What is ARIA for a spinner?
   connectedCallback() {
     upgradeProperty(this, 'active');
