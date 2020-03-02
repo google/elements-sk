@@ -13,10 +13,10 @@ test:
 	xvfb-run --auto-servernum --server-args "-screen 0 1280x1024x24" npx karma start --single-run
 
 login:
-	npm login --registry https://wombat-dressing-room.appspot.com/elements-sk/_ns
+	npm login --registry https://wombat-dressing-room.appspot.com
 
 publish:
-	cd elements-sk; npm publish --registry https://wombat-dressing-room.appspot.com/elements-sk/_ns
+	cd elements-sk; npm publish
 
 update-major:
 	cd elements-sk; npm version major
