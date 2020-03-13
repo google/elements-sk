@@ -47,8 +47,8 @@
  * @prop {string} label This mirrors the label attribute.
  *
  */
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 export class CheckOrRadio extends HTMLElement {
   get _role() { return 'checkbox'; }
@@ -84,9 +84,9 @@ export class CheckOrRadio extends HTMLElement {
       this.checked = e.target.checked;
     });
     this.addEventListener('click', (e) => {
-      if (e.target == this) {
+      if (e.target === this) {
         if (this.checked && this._role === 'radio') {
-          return
+          return;
         }
         this._input.click();
       }
@@ -94,8 +94,9 @@ export class CheckOrRadio extends HTMLElement {
   }
 
   get checked() { return this.hasAttribute('checked'); }
+
   set checked(val) {
-    let isTrue = !!val;
+    const isTrue = !!val;
     this._input.checked = isTrue;
     if (val) {
       this.setAttribute('checked', '');
@@ -105,8 +106,9 @@ export class CheckOrRadio extends HTMLElement {
   }
 
   get disabled() { return this.hasAttribute('disabled'); }
+
   set disabled(val) {
-    let isTrue = !!val;
+    const isTrue = !!val;
     this._input.disabled = isTrue;
     if (isTrue) {
       this.setAttribute('disabled', '');
@@ -116,6 +118,7 @@ export class CheckOrRadio extends HTMLElement {
   }
 
   get name() { return this.getAttribute('name'); }
+
   set name(val) {
     if (val === null || val === undefined) {
       return;
@@ -125,6 +128,7 @@ export class CheckOrRadio extends HTMLElement {
   }
 
   get label() { return this.getAttribute('label'); }
+
   set label(val) {
     if (val === null || val === undefined) {
       return;
@@ -134,11 +138,11 @@ export class CheckOrRadio extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (!this._input) {
-      return
+      return;
     }
     // Strictly check for null since an empty string doesn't mean false
     // for a boolean attribute.
-    let isTrue = newValue != null;
+    const isTrue = newValue != null;
     switch (name) {
       case 'checked':
         this._input.checked = isTrue;
