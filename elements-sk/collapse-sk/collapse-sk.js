@@ -25,8 +25,8 @@
  *     collapse, i.e., transition to display: none.
  *
  */
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('collapse-sk', class extends HTMLElement {
   connectedCallback() {
@@ -35,6 +35,7 @@ define('collapse-sk', class extends HTMLElement {
 
   /** @prop {boolean} closed Mirrors the closed attribute. */
   get closed() { return this.hasAttribute('closed'); }
+
   set closed(val) {
     if (val) {
       this.setAttribute('closed', '');

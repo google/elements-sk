@@ -46,7 +46,7 @@
  *        value of detail.index is the index of the selected tab.
  *
  */
-import { define } from '../define'
+import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
 define('tabs-sk', class extends HTMLElement {
@@ -60,7 +60,7 @@ define('tabs-sk', class extends HTMLElement {
 
   connectedCallback() {
     this.addEventListener('click', this);
-    this.select(0, false)
+    this.select(0, false);
   }
 
   disconnectedCallback() {
@@ -76,9 +76,10 @@ define('tabs-sk', class extends HTMLElement {
     });
   }
 
-    /** @prop selected {string} - Reflects the 'selected' attribute.  */
-    get selected() { return this.getAttribute('selected'); }
-    set selected(val) { this.setAttribute('selected', +val); }
+  /** @prop selected {string} - Reflects the 'selected' attribute.  */
+  get selected() { return this.getAttribute('selected'); }
+
+  set selected(val) { this.setAttribute('selected', +val); }
 
   /**
    * Force the selection of a tab
@@ -86,8 +87,8 @@ define('tabs-sk', class extends HTMLElement {
    * @param {number} index The index of the tab to select.
    * @param {boolean} [trigger=false] If true then trigger the 'tab-selected-sk' event.
    */
-  select(index, trigger=false) {
-    this.setAttribute('selected', index)
+  select(index, trigger = false) {
+    this.setAttribute('selected', index);
     this.querySelectorAll('button').forEach((ele, i) => {
       ele.classList.toggle('selected', i === index);
     });
@@ -96,7 +97,7 @@ define('tabs-sk', class extends HTMLElement {
 
   _trigger(index, trigger) {
     if (trigger) {
-      this.dispatchEvent(new CustomEvent('tab-selected-sk', { bubbles: true, detail: { index: index }}));
+      this.dispatchEvent(new CustomEvent('tab-selected-sk', { bubbles: true, detail: { index: index } }));
     }
     if (this.nextElementSibling.tagName === 'TABS-PANEL-SK') {
       this.nextElementSibling.setAttribute('selected', index);
@@ -105,7 +106,7 @@ define('tabs-sk', class extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue == newValue) {
-      return
+      return;
     }
     this.select(+newValue, false);
   }

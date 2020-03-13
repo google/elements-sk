@@ -49,8 +49,8 @@
  * </nav-links-sk>
  *
  */
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('nav-links-sk', class extends HTMLElement {
   static get observedAttributes() {
@@ -63,6 +63,7 @@ define('nav-links-sk', class extends HTMLElement {
 
   /** @prop shown {boolean} Mirrors the shown attribute. */
   get shown() { return this.hasAttribute('shown'); }
+
   set shown(val) {
     if (val) {
       this.setAttribute('shown', '');
@@ -81,10 +82,9 @@ define('nav-links-sk', class extends HTMLElement {
   }
 
   handleEvent(e) {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       e.preventDefault();
       this.shown = false;
     }
   }
 });
-

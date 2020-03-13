@@ -39,13 +39,13 @@
  *   <error-toast-sk></error-toast-sk>
  * </footer>
  */
-import 'elements-sk/toast-sk'
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import 'elements-sk/toast-sk';
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('error-toast-sk', class extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = `<toast-sk></toast-sk>`;
+    this.innerHTML = '<toast-sk></toast-sk>';
     this._toast = this.firstElementChild;
     document.addEventListener('error-sk', this);
   }
@@ -56,7 +56,7 @@ define('error-toast-sk', class extends HTMLElement {
 
   handleEvent(e) {
     if (e.detail.duration) {
-      this._toast.duration = e.detail.duration
+      this._toast.duration = e.detail.duration;
     }
     this._toast.textContent = e.detail.message;
     this._toast.show();

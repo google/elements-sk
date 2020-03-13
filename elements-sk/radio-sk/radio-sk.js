@@ -48,7 +48,7 @@
  */
 
 // Note that we are importing just the class, not the whole element + CSS definition.
-import { define } from '../define'
+import { define } from '../define';
 import { CheckOrRadio } from '../checkbox-sk/checkbox-sk.js';
 
 class RadioElement extends CheckOrRadio {

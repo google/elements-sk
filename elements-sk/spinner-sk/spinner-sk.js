@@ -23,8 +23,8 @@
  * @attr active - Boolean attribute, if present, spinner is active.
  *
  */
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('spinner-sk', class extends HTMLElement {
   // TODO(jcgregorio) What is ARIA for a spinner?
@@ -34,6 +34,7 @@ define('spinner-sk', class extends HTMLElement {
 
   /** @prop {boolean} active Mirrors the attribute 'active'. */
   get active() { return this.hasAttribute('active'); }
+
   set active(val) {
     if (val) {
       this.setAttribute('active', '');

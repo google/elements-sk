@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import '../styles/buttons'
+import '../styles/buttons';
 
-import './index.js'
+import './index.js';
 
-let select =  document.getElementById('select-sk');
-select.addEventListener('selection-changed', e => {
-   document.getElementById('event').textContent = JSON.stringify(e.detail, null, '  ');
+const select = document.getElementById('select-sk');
+select.addEventListener('selection-changed', (e) => {
+  document.getElementById('event').textContent = JSON.stringify(e.detail, null, '  ');
 });
 
 // Test MutationObserver by adding a selected element to the end.
- document.getElementById('select-add').addEventListener('click', e => {
-  let ele = document.createElement('div');
+document.getElementById('select-add').addEventListener('click', (e) => {
+  const ele = document.createElement('div');
   ele.textContent = Math.random();
   ele.setAttribute('selected', '');
   select.selection = -1;

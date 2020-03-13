@@ -47,8 +47,8 @@
  *   </pre>
  *
  */
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('multi-select-sk', class extends HTMLElement {
   constructor() {
@@ -73,10 +73,11 @@ define('multi-select-sk', class extends HTMLElement {
     this._obs.disconnect();
   }
 
-  /** @prop {Boolean} disabled - whether this element should respond to input.*/
+  /** @prop {Boolean} disabled - whether this element should respond to input. */
   get disabled() { return this.hasAttribute('disabled'); }
+
   set disabled(val) {
-    if (!!val) {
+    if (val) {
       this.setAttribute('disabled', '');
       this.selection = [];
     } else {
@@ -90,6 +91,7 @@ define('multi-select-sk', class extends HTMLElement {
    *                not sorted array, it will be sorted anyway.
    */
   get selection() { return this._selection; }
+
   set selection(val) {
     if (this.disabled) {
       return;

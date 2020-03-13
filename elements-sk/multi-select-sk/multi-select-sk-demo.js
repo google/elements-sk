@@ -12,25 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import '../styles/buttons'
+import '../styles/buttons';
 
-import './index.js'
+import './index.js';
 
-let select = document.getElementById('multi-select-sk');
-select.addEventListener('selection-changed', e => {
+const select = document.getElementById('multi-select-sk');
+select.addEventListener('selection-changed', (e) => {
   $$('#event').textContent = JSON.stringify(e.detail, null, '  ');
 });
 
 // Test MutationObserver by adding a selected element to the end.
- document.getElementById('select-add').addEventListener('click', e => {
-  let ele = document.createElement('div');
-  ele.textContent = 'should be selected' + Math.random().toFixed(3);
+document.getElementById('select-add').addEventListener('click', (e) => {
+  const ele = document.createElement('div');
+  ele.textContent = `should be selected${Math.random().toFixed(3)}`;
   ele.setAttribute('selected', '');
   select.appendChild(ele);
 });
 
- document.getElementById('other-add').addEventListener('click', e => {
-  let ele = document.createElement('div');
-  ele.textContent = 'should not be selected' + Math.random().toFixed(3);
+document.getElementById('other-add').addEventListener('click', (e) => {
+  const ele = document.createElement('div');
+  ele.textContent = `should not be selected${Math.random().toFixed(3)}`;
   select.appendChild(ele);
 });

@@ -23,7 +23,7 @@
  * @attr selected - The index of the tab panel to display.
  *
  */
-import { define } from '../define'
+import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
 define('tabs-panel-sk', class extends HTMLElement {
@@ -37,17 +37,18 @@ define('tabs-panel-sk', class extends HTMLElement {
 
   /** @prop {boolean} selected Mirrors the 'selected' attribute. */
   get selected() { return this.hasAttribute('selected'); }
+
   set selected(val) {
     this.setAttribute('selected', val);
     this._select(val);
   }
 
-	attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name, oldValue, newValue) {
     this._select(+newValue);
-	}
+  }
 
   _select(index) {
-    for (let i=0; i<this.children.length; i++) {
+    for (let i = 0; i < this.children.length; i++) {
       this.children[i].classList.toggle('selected', i === index);
     }
   }
