@@ -25,8 +25,8 @@
  *               Defaults to 5000. A value of 0 means to display
  *               forever.
  */
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('toast-sk', class extends HTMLElement {
   constructor() {
@@ -43,6 +43,7 @@ define('toast-sk', class extends HTMLElement {
 
   /** @prop {number} duration Mirrors the duration attribute. */
   get duration() { return +this.getAttribute('duration'); }
+
   set duration(val) { this.setAttribute('duration', val); }
 
   /** Displays the contents of the toast. */

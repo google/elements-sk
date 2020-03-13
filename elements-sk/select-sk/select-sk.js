@@ -48,8 +48,8 @@
  *   </pre>
  *
  */
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('select-sk', class extends HTMLElement {
   static get observedAttributes() {
@@ -82,8 +82,9 @@ define('select-sk', class extends HTMLElement {
 
   /** @prop {Boolean} disabled - This mirrors the disabled attribute. */
   get disabled() { return this.hasAttribute('disabled'); }
+
   set disabled(val) {
-    if (!!val) {
+    if (val) {
       this.setAttribute('disabled', '');
       this.setAttribute('aria-disabled', 'true');
       this.selection = -1;
@@ -98,6 +99,7 @@ define('select-sk', class extends HTMLElement {
    *                 value of -1 if nothing is selected.
    */
   get selection() { return this._selection; }
+
   set selection(val) {
     if (this.disabled) {
       return;
@@ -117,7 +119,7 @@ define('select-sk', class extends HTMLElement {
     if (this.disabled) {
       return;
     }
-    let oldIndex = this._selection;
+    const oldIndex = this._selection;
     // Look up the DOM path until we find an element that is a child of
     // 'this', and set _selection based on that.
     let target = e.target;
@@ -156,7 +158,7 @@ define('select-sk', class extends HTMLElement {
       this.setAttribute('tabindex', '0');
     }
     for (let i = 0; i < this.children.length; i++) {
-      let child = this.children[i];
+      const child = this.children[i];
       if (!child.hasAttribute('role')) {
         child.setAttribute('role', 'option');
       }
@@ -198,19 +200,18 @@ define('select-sk', class extends HTMLElement {
   }
 
   _onKeyDown(e) {
-    if (e.altKey)
-      return;
-    let oldIndex = this._selection;
+    if (e.altKey) return;
+    const oldIndex = this._selection;
     switch (e.key) {
       case 'ArrowDown':
         if (this.selection < this.children.length - 1) {
-          this.selection = this.selection + 1;
+          this.selection += 1;
         }
         e.preventDefault();
         break;
       case 'ArrowUp':
         if (this.selection > 0) {
-          this.selection = this.selection - 1;
+          this.selection -= 1;
         }
         e.preventDefault();
         break;
@@ -219,7 +220,7 @@ define('select-sk', class extends HTMLElement {
         e.preventDefault();
         break;
       case 'End':
-        this.selection = this.children.length-1;
+        this.selection = this.children.length - 1;
         e.preventDefault();
         break;
     }

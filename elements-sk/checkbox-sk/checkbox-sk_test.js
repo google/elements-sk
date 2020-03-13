@@ -12,61 +12,57 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './index.js'
-import '../radio-sk'
+import './index.js';
+import '../radio-sk';
 
-let container = document.createElement("div");
+const container = document.createElement('div');
 document.body.appendChild(container);
 
-afterEach(function() {
-  container.innerHTML = "";
+afterEach(() => {
+  container.innerHTML = '';
 });
 
 function _checkBoxSetup() {
   return window.customElements.whenDefined('checkbox-sk').then(() => {
-    container.innerHTML = `<checkbox-sk></checkbox-sk>`;
+    container.innerHTML = '<checkbox-sk></checkbox-sk>';
     return container.querySelector('checkbox-sk');
   });
 }
 
 function _radioSetup() {
   return window.customElements.whenDefined('radio-sk').then(() => {
-    container.innerHTML = `<radio-sk></radio-sk>`;
+    container.innerHTML = '<radio-sk></radio-sk>';
     return container.querySelector('radio-sk');
   });
 }
 
-describe('checkbox-sk', function() {
-  it('responds to click()', function() {
-    return _checkBoxSetup().then((cb) => {
-      assert.isFalse(cb.checked);
+describe('checkbox-sk', () => {
+  it('responds to click()', () => _checkBoxSetup().then((cb) => {
+    assert.isFalse(cb.checked);
 
-      let called = false;
-      cb.addEventListener('change', (e) => { called = true; })
+    let called = false;
+    cb.addEventListener('change', (e) => { called = true; });
 
-      cb.click();
-      assert.isTrue(called);
-      assert.isTrue(cb.checked);
+    cb.click();
+    assert.isTrue(called);
+    assert.isTrue(cb.checked);
 
-      cb.click();
-      assert.isFalse(cb.checked);
-    });
-  });
+    cb.click();
+    assert.isFalse(cb.checked);
+  }));
 });
 
-describe('radio-sk', function() {
-  it('responds to click()', function() {
-    return _radioSetup().then((rb) => {
-      assert.isFalse(rb.checked);
+describe('radio-sk', () => {
+  it('responds to click()', () => _radioSetup().then((rb) => {
+    assert.isFalse(rb.checked);
 
-      let called = false;
-      rb.addEventListener('change', (e) => { called = true; })
+    let called = false;
+    rb.addEventListener('change', (e) => { called = true; });
 
-      rb.click();
-      assert.isTrue(called);
-      assert.isTrue(rb.checked);
-      rb.click();
-      assert.isTrue(rb.checked);
-    });
-  });
+    rb.click();
+    assert.isTrue(called);
+    assert.isTrue(rb.checked);
+    rb.click();
+    assert.isTrue(rb.checked);
+  }));
 });

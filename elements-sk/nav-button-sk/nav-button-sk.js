@@ -54,13 +54,13 @@
 import '../styles/buttons';
 import '../icon/menu-icon-sk';
 
-import { define } from '../define'
-import { upgradeProperty } from '../upgradeProperty'
+import { define } from '../define';
+import { upgradeProperty } from '../upgradeProperty';
 
 define('nav-button-sk', class extends HTMLElement {
   connectedCallback() {
     this.addEventListener('click', this);
-    this.innerHTML = `<button><menu-icon-sk></menu-icon-sk></button>`;
+    this.innerHTML = '<button><menu-icon-sk></menu-icon-sk></button>';
   }
 
   disconnectedCallback() {
@@ -68,7 +68,7 @@ define('nav-button-sk', class extends HTMLElement {
   }
 
   handleEvent(e) {
-    if (this.nextElementSibling.tagName === "NAV-LINKS-SK") {
+    if (this.nextElementSibling.tagName === 'NAV-LINKS-SK') {
       this.nextElementSibling.shown = !this.nextElementSibling.shown;
       if (this.nextElementSibling.shown) {
         this.nextElementSibling.firstElementChild.focus();

@@ -12,20 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './index.js'
-import '../tabs-panel-sk/index.js'
+import './index.js';
+import '../tabs-panel-sk/index.js';
 
-let container = document.createElement("div");
+const container = document.createElement('div');
 document.body.appendChild(container);
 
-afterEach(function() {
-  container.innerHTML = "";
+afterEach(() => {
+  container.innerHTML = '';
 });
 
-describe('tabs-sk', function() {
-  it('has selected attribute', function() {
-    return Promise.all([customElements.whenDefined('tabs-sk'), customElements.whenDefined('tabs-panel-sk')]).then(() => {
-      container.innerHTML = `
+describe('tabs-sk', () => {
+  it('has selected attribute', () => Promise.all([customElements.whenDefined('tabs-sk'), customElements.whenDefined('tabs-panel-sk')]).then(() => {
+    container.innerHTML = `
         <tabs-sk>
           <button>One</button>
           <button>Two</button>
@@ -35,21 +34,19 @@ describe('tabs-sk', function() {
           <section id=panel2></section>
         </tabs-panel-sk>
         `;
-      let s = container.firstElementChild;
-      assert.equal(0, s.getAttribute('selected'));
-      s.setAttribute('selected', 1);
-      assert.equal(1, s.getAttribute('selected'));
-      let panel1 = container.querySelector('#panel1');
-      let panel2 = container.querySelector('#panel2');
-      assert.isNotNull(panel2);
-      assert.isFalse(panel1.classList.contains('selected'));
-      assert.isTrue(panel2.classList.contains('selected'));
-    });
-  }); // has selected attribute
+    const s = container.firstElementChild;
+    assert.equal(0, s.getAttribute('selected'));
+    s.setAttribute('selected', 1);
+    assert.equal(1, s.getAttribute('selected'));
+    const panel1 = container.querySelector('#panel1');
+    const panel2 = container.querySelector('#panel2');
+    assert.isNotNull(panel2);
+    assert.isFalse(panel1.classList.contains('selected'));
+    assert.isTrue(panel2.classList.contains('selected'));
+  })); // has selected attribute
 
-  it('has selected property', function() {
-    return Promise.all([customElements.whenDefined('tabs-sk'), customElements.whenDefined('tabs-panel-sk')]).then(() => {
-      container.innerHTML = `
+  it('has selected property', () => Promise.all([customElements.whenDefined('tabs-sk'), customElements.whenDefined('tabs-panel-sk')]).then(() => {
+    container.innerHTML = `
         <tabs-sk>
           <button>One</button>
           <button>Two</button>
@@ -59,16 +56,14 @@ describe('tabs-sk', function() {
           <section id=panel2></section>
         </tabs-panel-sk>
         `;
-      let s = container.firstElementChild;
-      assert.equal(0, s.selected);
-      s.selected = 1;
-      assert.equal(1, s.selected);
-      let panel1 = container.querySelector('#panel1');
-      let panel2 = container.querySelector('#panel2');
-      assert.isNotNull(panel2);
-      assert.isFalse(panel1.classList.contains('selected'));
-      assert.isTrue(panel2.classList.contains('selected'));
-    });
-  }); // has selected property
-
+    const s = container.firstElementChild;
+    assert.equal(0, s.selected);
+    s.selected = 1;
+    assert.equal(1, s.selected);
+    const panel1 = container.querySelector('#panel1');
+    const panel2 = container.querySelector('#panel2');
+    assert.isNotNull(panel2);
+    assert.isFalse(panel1.classList.contains('selected'));
+    assert.isTrue(panel2.classList.contains('selected'));
+  })); // has selected property
 });

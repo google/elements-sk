@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-import '../styles/buttons'
+import '../styles/buttons';
 
-import { errorMessage } from './index.js'
+import { errorMessage } from './index.js';
 
-document.getElementById('test_error_toast').addEventListener('click', e => errorMessage('Testing'));
+document.getElementById('test_error_toast').addEventListener('click', (e) => errorMessage('Testing'));
