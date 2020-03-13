@@ -24,7 +24,7 @@ iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/20
 
 define('event-icon-sk', class extends HTMLElement {
 	connectedCallback() {
-		let icon = iconSkTemplate.content.cloneNode(true);
+	const icon = iconSkTemplate.content.cloneNode(true);
     while (this.firstChild) {
       this.removeChild(this.firstChild);
     }
