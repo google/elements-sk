@@ -1,6 +1,8 @@
 elements-sk
 ===========
 
+![](https://github.com/google/elements-sk/workflows/jstest/badge.svg)
+
 A collection of v1 custom elements.
 
 See [A la carte Web Development](https://bitworking.org/news/2018/03/a-la-carte-web-development)
