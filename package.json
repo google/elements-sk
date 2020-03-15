@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "test": "npx karma start --single-run --browsers=ChromeHeadlessCustom",
-    "build:ci": "npm run clean && npm run test"
+    "build:ci": "npm ci && npm run clean && npm run test"
   },
   "devDependencies": {
     "@webcomponents/custom-elements": "^1.2.4",
