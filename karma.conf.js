@@ -1,18 +1,17 @@
 const path = require('path');
 
-module.exports = function(config) {
-
+module.exports = function (config) {
   let webpackConfig = require(path.resolve(__dirname, 'webpack.config.js'));
   // Webpack 3+ configs can be either objects or functions that produce the
   // config object. Karma currently doesn't handle the latter, so do it
   // ourselves here.
   if (typeof webpackConfig === 'function') {
-    webpackConfig = webpackConfig({}, {mode: 'development'});
+    webpackConfig = webpackConfig({}, { mode: 'development' });
   }
   webpackConfig.entry = null;
   webpackConfig.mode = 'development';
 
-  // Secret sause to get webpack-karma working.
+  // Secret sauce to get webpack-karma working.
   delete webpackConfig.output;
 
   config.set({
@@ -46,12 +45,12 @@ module.exports = function(config) {
 
     preprocessors: {
       // add webpack as preprocessor
-      'elements-sk/**/*_test.js': [ 'webpack' ],
+      'elements-sk/**/*_test.js': ['webpack'],
     },
 
     // list of files to exclude
     exclude: [
-      'elements-sk/node_modules/**'
+      'elements-sk/node_modules/**',
     ],
 
 
@@ -61,7 +60,7 @@ module.exports = function(config) {
 
 
     // Get the port from KARMA_PORT if it is set.
-    port: parseInt(process.env.KARMA_PORT || "9876"),
+    port: parseInt(process.env.KARMA_PORT || '9876'),
 
 
     // enable / disable colors in the output (reporters and logs)
@@ -77,6 +76,13 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
+
+    customLaunchers: {
+      ChromeHeadlessCustom: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-gpu'],
+      },
+    },
 
     // Start these browsers.
     browsers: ['Chrome', 'Firefox'],

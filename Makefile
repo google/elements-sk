@@ -10,7 +10,7 @@ serve:
 
 test:
 	# Run the generated tests just once under Xvfb.
-	xvfb-run --auto-servernum --server-args "-screen 0 1280x1024x24" npx karma start --single-run
+	npx karma start --single-run --browsers=ChromeHeadlessCustom
 
 login:
 	npm login --registry https://wombat-dressing-room.appspot.com
