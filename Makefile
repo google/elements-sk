@@ -22,21 +22,21 @@ login:
 
 .PHONY: publish
 publish: icons
-	cd elements-sk; npm publish
+	npm run clean; npm run build; cd elements-sk; npm publish
 
 .PHONY: update-major
 update-major:
-	cd elements-sk; npm version major
+	cd src; npm version major
 	echo "Don't forget to publish."
 
 .PHONY: update-minor
 update-minor:
-	cd elements-sk; npm version minor
+	cd src; npm version minor
 	echo "Don't forget to publish."
 
 .PHONY: update-patch
 update-patch:
-	cd elements-sk; npm version patch
+	cd src; npm version patch
 	echo "Don't forget to publish."
 
 .PHONY: docs

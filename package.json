@@ -8,9 +8,12 @@
   "license": "Apache-2.0",
   "repository": "https://github.com/google/elements-sk.git",
   "scripts": {
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./elements-sk ./dist",
+    "build": "npm run build-typescript && npm run build-assets",
+    "build-typescript": "tsc",
+    "build-assets": "rsync -avz src/ elements-sk/ --exclude '*.js' --exclude '*.ts'",
     "test": "npx karma start --single-run --browsers=ChromeHeadlessCustom",
-    "build:ci": "npm ci && npm run clean && npm run test"
+    "build:ci": "npm ci && npm run clean && npm run build && npm run test"
   },
   "devDependencies": {
     "@webcomponents/custom-elements": "^1.2.4",

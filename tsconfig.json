@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "es6",
+    "outDir": "elements-sk",
+    "target": "es6",
+  },
+  "include": ["src/**/*"]
+}

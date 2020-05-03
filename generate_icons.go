@@ -30,7 +30,7 @@ import (
 )
 
 const SVG_SRC = "./node_modules/material-design-icons/%s/svg/production/"
-const SVG_DEST = "./elements-sk/icon/%s-icon-sk.js"
+const SVG_DEST = "./src/icon/%s-icon-sk.js"
 
 const DEMO_HTML_PATH = "./pages/icon-sk.html"
 const DEMO_JS_PATH = "./pages/icon-sk.js"
