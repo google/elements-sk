@@ -51,28 +51,28 @@
  *
  */
 
-import '../styles/buttons';
-import '../icon/menu-icon-sk';
-
 import { define } from '../define';
-import { upgradeProperty } from '../upgradeProperty';
+import { NavLinksSk } from '../nav-links-sk/nav-links-sk';
 
-define('nav-button-sk', class extends HTMLElement {
-  connectedCallback() {
+export class NavButtonSk extends HTMLElement {
+  connectedCallback(): void {
     this.addEventListener('click', this);
     this.innerHTML = '<button><menu-icon-sk></menu-icon-sk></button>';
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.removeEventListener('click', this);
   }
 
-  handleEvent(e) {
-    if (this.nextElementSibling.tagName === 'NAV-LINKS-SK') {
-      this.nextElementSibling.shown = !this.nextElementSibling.shown;
-      if (this.nextElementSibling.shown) {
-        this.nextElementSibling.firstElementChild.focus();
+  handleEvent(e: Event): void {
+    if (this.nextElementSibling?.tagName === 'NAV-LINKS-SK') {
+      const navLinksSk = this.nextElementSibling as NavLinksSk;
+      navLinksSk.shown = !navLinksSk.shown;
+      if (navLinksSk.shown) {
+        (navLinksSk.firstElementChild as HTMLElement).focus();
       }
     }
   }
-});
+};
+
+define('nav-button-sk', NavButtonSk);

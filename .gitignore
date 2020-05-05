@@ -1,7 +1,8 @@
 node_modules/
 out/
 dist/
+coverage/
 elements-sk/
 
 # Generated icon elements.
-src/icon/*.js
+src/icon/*.ts

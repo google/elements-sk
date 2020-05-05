@@ -51,8 +51,8 @@
 import { define } from '../define';
 import { CheckOrRadio } from '../checkbox-sk/checkbox-sk.js';
 
-class RadioElement extends CheckOrRadio {
-  get _role() { return 'radio'; }
+export class RadioElement extends CheckOrRadio {
+  protected get _role(): string { return 'radio'; }
 }
 
 // The radio-sk element contains a native 'input' element in light DOM

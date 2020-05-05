@@ -51,8 +51,11 @@
 import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
-define('select-sk', class extends HTMLElement {
-  static get observedAttributes() {
+export class SelectSk extends HTMLElement {
+  private _obs: MutationObserver;
+  private _selection: number;
+
+  static get observedAttributes(): string[] {
     return ['disabled'];
   }
 
@@ -63,7 +66,7 @@ define('select-sk', class extends HTMLElement {
     this._selection = -1;
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     upgradeProperty(this, 'selection');
     upgradeProperty(this, 'disabled');
     this.addEventListener('click', this._click);
@@ -74,16 +77,16 @@ define('select-sk', class extends HTMLElement {
     this._bubbleUp();
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.removeEventListener('click', this._click);
     this.removeEventListener('keydown', this._onKeyDown);
     this._obs.disconnect();
   }
 
-  /** @prop {Boolean} disabled - This mirrors the disabled attribute. */
-  get disabled() { return this.hasAttribute('disabled'); }
+  /** This mirrors the disabled attribute. */
+  get disabled(): boolean { return this.hasAttribute('disabled'); }
 
-  set disabled(val) {
+  set disabled(val: boolean) {
     if (val) {
       this.setAttribute('disabled', '');
       this.setAttribute('aria-disabled', 'true');
@@ -95,12 +98,10 @@ define('select-sk', class extends HTMLElement {
     }
   }
 
-  /** @prop {Number} selection The index of the item selected. Has a
-   *                 value of -1 if nothing is selected.
-   */
-  get selection() { return this._selection; }
+  /** The index of the item selected. Has a value of -1 if nothing is selected. */
+  get selection(): number | string | null | undefined { return this._selection; }
 
-  set selection(val) {
+  set selection(val: number | string | null | undefined) {
     if (this.disabled) {
       return;
     }
@@ -115,18 +116,18 @@ define('select-sk', class extends HTMLElement {
     this._rationalize();
   }
 
-  _click(e) {
+  private _click(e: MouseEvent): void {
     if (this.disabled) {
       return;
     }
     const oldIndex = this._selection;
     // Look up the DOM path until we find an element that is a child of
     // 'this', and set _selection based on that.
-    let target = e.target;
+    let target: Element | null = (e.target as Element);
     while (target && target.parentElement !== this) {
       target = target.parentElement;
     }
-    if (target && target.parentElement === this) {
+    if (target?.parentElement === this) {
       for (let i = 0; i < this.children.length; i++) {
         if (this.children[i] === target) {
           this._selection = i;
@@ -140,8 +141,8 @@ define('select-sk', class extends HTMLElement {
     }
   }
 
-  _emitEvent() {
-    this.dispatchEvent(new CustomEvent('selection-changed', {
+  private _emitEvent(): void {
+    this.dispatchEvent(new CustomEvent<SelectSkSelectionChangedEventDetail>('selection-changed', {
       detail: {
         selection: this._selection,
       },
@@ -150,7 +151,7 @@ define('select-sk', class extends HTMLElement {
   }
 
   // Loop over all immediate child elements and make sure at most only one is selected.
-  _rationalize() {
+  private _rationalize(): void {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'listbox');
     }
@@ -173,7 +174,7 @@ define('select-sk', class extends HTMLElement {
   }
 
   // Loop over all immediate child elements and find the first one selected.
-  _bubbleUp() {
+  private _bubbleUp(): void {
     this._selection = -1;
     if (this.disabled) {
       return;
@@ -187,10 +188,10 @@ define('select-sk', class extends HTMLElement {
     this._rationalize();
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: any, newValue: any): void {
     // Only handling 'disabled'.
     const hasValue = newValue !== null;
-    this.setAttribute('aria-disabled', hasValue);
+    this.setAttribute('aria-disabled', String(hasValue));
     if (hasValue) {
       this.removeAttribute('tabindex');
       this.blur();
@@ -199,19 +200,19 @@ define('select-sk', class extends HTMLElement {
     }
   }
 
-  _onKeyDown(e) {
+  private _onKeyDown(e: KeyboardEvent): void {
     if (e.altKey) return;
     const oldIndex = this._selection;
     switch (e.key) {
       case 'ArrowDown':
-        if (this.selection < this.children.length - 1) {
-          this.selection += 1;
+        if (this.selection! < this.children.length - 1) {
+          (this.selection as number) += 1;
         }
         e.preventDefault();
         break;
       case 'ArrowUp':
-        if (this.selection > 0) {
-          this.selection -= 1;
+        if (this.selection! > 0) {
+          (this.selection as number) -= 1;
         }
         e.preventDefault();
         break;
@@ -228,4 +229,10 @@ define('select-sk', class extends HTMLElement {
       this._emitEvent();
     }
   }
-});
+};
+
+define('select-sk', SelectSk);
+
+export interface SelectSkSelectionChangedEventDetail {
+  readonly selection: number;
+};

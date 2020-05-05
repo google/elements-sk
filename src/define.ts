@@ -36,10 +36,13 @@
  *     define('my-element', class extends HTMLElement {...});
  *
  */
-export function define(tagName, cl) {
+export function define(tagName: string, cl: CustomElementConstructor): void {
   if (window.customElements.get(tagName) === undefined) {
     window.customElements.define(tagName, cl);
   } else {
-    console.log(`Multiple registration attempts for ${tagName}. This should only happen during testing, it's probably an error outside of testing.`);
+    console.log(
+      `Multiple registration attempts for ${tagName}. ` +
+      'This should only happen during testing, ' +
+      'it\'s probably an error outside of testing.');
   }
 }

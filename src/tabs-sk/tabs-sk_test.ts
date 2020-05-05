@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './index.js';
-import '../tabs-panel-sk/index.js';
+import { TabsSk } from "./tabs-sk";
+
+const assert = chai.assert;
 
 const container = document.createElement('div');
 document.body.appendChild(container);
@@ -34,12 +35,12 @@ describe('tabs-sk', () => {
           <section id=panel2></section>
         </tabs-panel-sk>
         `;
-    const s = container.firstElementChild;
-    assert.equal(0, s.getAttribute('selected'));
-    s.setAttribute('selected', 1);
-    assert.equal(1, s.getAttribute('selected'));
-    const panel1 = container.querySelector('#panel1');
-    const panel2 = container.querySelector('#panel2');
+    const s = container.firstElementChild as TabsSk;
+    assert.equal('0', s.getAttribute('selected'));
+    s.setAttribute('selected', '1');
+    assert.equal('1', s.getAttribute('selected'));
+    const panel1 = container.querySelector('#panel1')!;
+    const panel2 = container.querySelector('#panel2')!;
     assert.isNotNull(panel2);
     assert.isFalse(panel1.classList.contains('selected'));
     assert.isTrue(panel2.classList.contains('selected'));
@@ -56,12 +57,12 @@ describe('tabs-sk', () => {
           <section id=panel2></section>
         </tabs-panel-sk>
         `;
-    const s = container.firstElementChild;
+    const s = container.firstElementChild as TabsSk;
     assert.equal(0, s.selected);
     s.selected = 1;
     assert.equal(1, s.selected);
-    const panel1 = container.querySelector('#panel1');
-    const panel2 = container.querySelector('#panel2');
+    const panel1 = container.querySelector('#panel1')!;
+    const panel2 = container.querySelector('#panel2')!;
     assert.isNotNull(panel2);
     assert.isFalse(panel1.classList.contains('selected'));
     assert.isTrue(panel2.classList.contains('selected'));

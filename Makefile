@@ -1,27 +1,30 @@
+.PHONY: clean-build
+clean-build:
+	npm run clean; npm run build
+
 .PHONY: default
-default: icons
+default:
 	npx webpack-cli --mode=development
 
 .PHONY: release
-release: icons
+release:
 	npm ci
 	npx webpack-cli --mode=production
 
 .PHONY: serve
-serve: icons
+serve:
 	npx webpack-dev-server --mode=production --content-base ./dist --watch-poll
 
 .PHONY: test
 test:
-	# Run the generated tests just once under Xvfb.
-	npx karma start --single-run --browsers=ChromeHeadlessCustom
+	npx karma start --single-run --browsers ChromeHeadless
 
 .PHONY: login
 login:
 	npm login --registry https://wombat-dressing-room.appspot.com
 
 .PHONY: publish
-publish: icons
+publish:
 	npm run clean; npm run build; cd elements-sk; npm publish
 
 .PHONY: update-major

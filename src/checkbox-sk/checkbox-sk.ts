@@ -51,16 +51,20 @@ import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
 export class CheckOrRadio extends HTMLElement {
-  get _role() { return 'checkbox'; }
+  protected get _role() { return 'checkbox'; }
 
   static get observedAttributes() {
     return ['checked', 'disabled', 'name', 'label'];
   }
 
+  private _label: HTMLSpanElement | null = null;
+  private _input: HTMLInputElement | null = null;
+
   connectedCallback() {
     this.innerHTML = `<label><input type=${this._role}></input><span class=box></span><span class=label></span></label>`;
-    this._label = this.querySelector('.label');
-    this._input = this.querySelector('input');
+
+    this._label = this.querySelector<HTMLSpanElement>('.label');
+    this._input = this.querySelector<HTMLInputElement>('input');
     upgradeProperty(this, 'checked');
     upgradeProperty(this, 'disabled');
     upgradeProperty(this, 'name');
@@ -74,30 +78,30 @@ export class CheckOrRadio extends HTMLElement {
     this.name = this.name;
     this.label = this.label;
 
-    this._input.checked = this.checked;
-    this._input.disabled = this.disabled;
-    this._input.setAttribute('name', this.getAttribute('name'));
-    this._label.textContent = this.getAttribute('label');
+    this._input!.checked = this.checked;
+    this._input!.disabled = this.disabled; 
+    this._input!.setAttribute('name', this.getAttribute('name') || '');
+    this._label!.textContent = this.getAttribute('label');
     // TODO(jcgregorio) Do we capture and alter the 'input' and 'change' events generated
     // by the input element so that the evt.target points to 'this'?
-    this._input.addEventListener('change', (e) => {
-      this.checked = e.target.checked;
+    this._input!.addEventListener('change', (e) => {
+      this.checked = (e.target as HTMLInputElement).checked;
     });
     this.addEventListener('click', (e) => {
       if (e.target === this) {
         if (this.checked && this._role === 'radio') {
           return;
         }
-        this._input.click();
+        this._input!.click();
       }
     });
   }
 
-  get checked() { return this.hasAttribute('checked'); }
+  get checked(): boolean { return this.hasAttribute('checked'); }
 
-  set checked(val) {
+  set checked(val: boolean) {
     const isTrue = !!val;
-    this._input.checked = isTrue;
+    this._input!.checked = isTrue;
     if (val) {
       this.setAttribute('checked', '');
     } else {
@@ -105,11 +109,11 @@ export class CheckOrRadio extends HTMLElement {
     }
   }
 
-  get disabled() { return this.hasAttribute('disabled'); }
+  get disabled(): boolean { return this.hasAttribute('disabled'); }
 
-  set disabled(val) {
+  set disabled(val: boolean) {
     const isTrue = !!val;
-    this._input.disabled = isTrue;
+    this._input!.disabled = isTrue;
     if (isTrue) {
       this.setAttribute('disabled', '');
     } else {
@@ -117,26 +121,26 @@ export class CheckOrRadio extends HTMLElement {
     }
   }
 
-  get name() { return this.getAttribute('name'); }
+  get name(): string { return this.getAttribute('name') || ''; }
 
-  set name(val) {
+  set name(val: string) {
     if (val === null || val === undefined) {
       return;
     }
     this.setAttribute('name', val);
-    this._input.setAttribute('name', val);
+    this._input!.setAttribute('name', val);
   }
 
-  get label() { return this.getAttribute('label'); }
+  get label(): string { return this.getAttribute('label') || ''; }
 
-  set label(val) {
+  set label(val: string) {
     if (val === null || val === undefined) {
       return;
     }
     this.setAttribute('label', val);
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     if (!this._input) {
       return;
     }
@@ -151,10 +155,10 @@ export class CheckOrRadio extends HTMLElement {
         this._input.disabled = isTrue;
         break;
       case 'name':
-        this._input.name = newValue;
+        this._input.name = newValue || '';
         break;
       case 'label':
-        this._label.textContent = newValue;
+        this._label!.textContent = newValue;
         break;
     }
   }

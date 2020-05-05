@@ -39,26 +39,28 @@
  *   <error-toast-sk></error-toast-sk>
  * </footer>
  */
-import 'elements-sk/toast-sk';
 import { define } from '../define';
-import { upgradeProperty } from '../upgradeProperty';
+import { ToastSk } from '../toast-sk/toast-sk';
+import { ErrorSkEventDetail } from '../errorMessage';
 
 define('error-toast-sk', class extends HTMLElement {
-  connectedCallback() {
+  private _toast: ToastSk | null = null;
+
+  connectedCallback(): void {
     this.innerHTML = '<toast-sk></toast-sk>';
-    this._toast = this.firstElementChild;
+    this._toast = this.firstElementChild as ToastSk;
     document.addEventListener('error-sk', this);
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     document.removeEventListener('error-sk', this);
   }
 
-  handleEvent(e) {
+  handleEvent(e: CustomEvent<ErrorSkEventDetail>) {
     if (e.detail.duration) {
-      this._toast.duration = e.detail.duration;
+      this._toast!.duration = e.detail.duration;
     }
-    this._toast.textContent = e.detail.message;
-    this._toast.show();
+    this._toast!.textContent = e.detail.message;
+    this._toast!.show();
   }
 });

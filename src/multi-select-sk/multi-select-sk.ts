@@ -50,7 +50,10 @@
 import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
-define('multi-select-sk', class extends HTMLElement {
+export class MultiSelectSk extends HTMLElement {
+  private _obs: MutationObserver;
+  private _selection: number[];
+
   constructor() {
     super();
     // Keep _selection up to date by monitoring DOM changes.
@@ -58,7 +61,7 @@ define('multi-select-sk', class extends HTMLElement {
     this._selection = [];
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     upgradeProperty(this, 'selection');
     upgradeProperty(this, 'disabled');
     this.addEventListener('click', this._click);
@@ -68,15 +71,15 @@ define('multi-select-sk', class extends HTMLElement {
     this._bubbleUp();
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.removeEventListener('click', this._click);
     this._obs.disconnect();
   }
 
-  /** @prop {Boolean} disabled - whether this element should respond to input. */
-  get disabled() { return this.hasAttribute('disabled'); }
+  /** Whether this element should respond to input. */
+  get disabled(): boolean { return this.hasAttribute('disabled'); }
 
-  set disabled(val) {
+  set disabled(val: boolean) {
     if (val) {
       this.setAttribute('disabled', '');
       this.selection = [];
@@ -86,11 +89,11 @@ define('multi-select-sk', class extends HTMLElement {
     }
   }
 
-  /** @prop {Array} selection - A sorted array of indices that are selected
-   *                or [] if nothing is selected. If selection is set to a
-   *                not sorted array, it will be sorted anyway.
+  /**
+   * A sorted array of indices that are selected or [] if nothing is selected.
+   * If selection is set to a not sorted array, it will be sorted anyway.
    */
-  get selection() { return this._selection; }
+  get selection(): number[] { return this._selection; }
 
   set selection(val) {
     if (this.disabled) {
@@ -104,13 +107,13 @@ define('multi-select-sk', class extends HTMLElement {
     this._rationalize();
   }
 
-  _click(e) {
+  private _click(e: MouseEvent): void {
     if (this.disabled) {
       return;
     }
     // Look up the DOM path until we find an element that is a child of
     // 'this', and set _selection based on that.
-    let target = e.target;
+    let target: Element | null = e.target as Element;
     while (target && target.parentElement !== this) {
       target = target.parentElement;
     }
@@ -123,7 +126,7 @@ define('multi-select-sk', class extends HTMLElement {
       target.setAttribute('selected', '');
     }
     this._bubbleUp();
-    this.dispatchEvent(new CustomEvent('selection-changed', {
+    this.dispatchEvent(new CustomEvent<MultiSelectSkSelectionChangedEventDetail>('selection-changed', {
       detail: {
         selection: this._selection,
       },
@@ -133,7 +136,7 @@ define('multi-select-sk', class extends HTMLElement {
 
   // Loop over all immediate child elements update the selected attributes
   // based on the selected property of this selement.
-  _rationalize() {
+  private _rationalize(): void {
     // assume this.selection is sorted when this is called.
     let s = 0;
     for (let i = 0; i < this.children.length; i++) {
@@ -151,7 +154,7 @@ define('multi-select-sk', class extends HTMLElement {
 
   // Loop over all immediate child elements and find all with the selected
   // attribute.
-  _bubbleUp() {
+  private _bubbleUp(): void {
     this._selection = [];
     if (this.disabled) {
       return;
@@ -163,4 +166,10 @@ define('multi-select-sk', class extends HTMLElement {
     }
     this._rationalize();
   }
-});
+};
+
+define('multi-select-sk', MultiSelectSk);
+
+export interface MultiSelectSkSelectionChangedEventDetail {
+  readonly selection: number[];
+};

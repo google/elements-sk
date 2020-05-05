@@ -13,33 +13,36 @@
 // limitations under the License.
 
 /**
- * @module elements-sk/spinner-sk
- * @decription <h2><code>spinner-sk</code></h2>
+ * @module elements-sk/collapse-sk
+ * @description <h2><code>collapse-sk</code></h2>
  *
  * <p>
- *   An activity spinner.
+ *   Is a collapsable element, upon collapse the element and its children
+ *   are no longer displayed.
  * </p>
  *
- * @attr active - Boolean attribute, if present, spinner is active.
+ *  @attr closed - A boolean attribute that, if present, causes the element to
+ *     collapse, i.e., transition to display: none.
  *
  */
 import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
-define('spinner-sk', class extends HTMLElement {
-  // TODO(jcgregorio) What is ARIA for a spinner?
-  connectedCallback() {
-    upgradeProperty(this, 'active');
+export class CollapseSk extends HTMLElement {
+  connectedCallback(): void {
+    upgradeProperty(this, 'closed');
   }
 
-  /** @prop {boolean} active Mirrors the attribute 'active'. */
-  get active() { return this.hasAttribute('active'); }
+  /** Mirrors the closed attribute. */
+  get closed(): boolean { return this.hasAttribute('closed'); }
 
-  set active(val) {
+  set closed(val: boolean) {
     if (val) {
-      this.setAttribute('active', '');
+      this.setAttribute('closed', '');
     } else {
-      this.removeAttribute('active');
+      this.removeAttribute('closed');
     }
   }
-});
+};
+
+define('collapse-sk', CollapseSk);

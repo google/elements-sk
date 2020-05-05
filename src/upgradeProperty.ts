@@ -36,10 +36,10 @@
  * });
  *
  */
-export function upgradeProperty(ele, prop) {
+export function upgradeProperty(ele: Element, prop: string): void {
   if (ele.hasOwnProperty(prop)) {
-    const value = ele[prop];
-    delete ele[prop];
-    ele[prop] = value;
+    const value = (ele as any)[prop];
+    delete (ele as any)[prop];
+    (ele as any)[prop] = value;
   }
 }

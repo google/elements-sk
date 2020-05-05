@@ -26,30 +26,32 @@
 import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
-define('tabs-panel-sk', class extends HTMLElement {
-  static get observedAttributes() {
+ export class TabsPanelSk extends HTMLElement {
+  static get observedAttributes(): string[] {
     return ['selected'];
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     upgradeProperty(this, 'selected');
   }
 
-  /** @prop {boolean} selected Mirrors the 'selected' attribute. */
-  get selected() { return this.hasAttribute('selected'); }
+  /** Mirrors the 'selected' attribute. */
+  get selected(): number { return +(this.getAttribute('selected') || ''); }
 
-  set selected(val) {
-    this.setAttribute('selected', val);
+  set selected(val: number) {
+    this.setAttribute('selected', String(val));
     this._select(val);
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: any, newValue: any): void {
     this._select(+newValue);
   }
 
-  _select(index) {
+  private _select(index: number): void {
     for (let i = 0; i < this.children.length; i++) {
       this.children[i].classList.toggle('selected', i === index);
     }
   }
-});
+};
+
+define('tabs-panel-sk', TabsPanelSk);

@@ -12,7 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './index.js';
+import { MultiSelectSk } from "./multi-select-sk";
+import { SelectSk } from "../select-sk/select-sk";
+
+const assert = chai.assert;
 
 const container = document.createElement('div');
 document.body.appendChild(container);
@@ -25,8 +28,8 @@ describe('multi-select-sk', () => {
   describe('selection property', () => {
     it('has a default value', () => window.customElements.whenDefined('multi-select-sk').then(() => {
       container.innerHTML = '<multi-select-sk></multi-select-sk>';
-      const s = container.firstElementChild;
-      assert.deepEqual([], s._selection);
+      const s = container.firstElementChild as MultiSelectSk;
+      assert.deepEqual([], (s as any)._selection);
       assert.deepEqual([], s.selection);
     }));
 
@@ -37,8 +40,8 @@ describe('multi-select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      assert.deepEqual([1], s._selection);
+      const s = container.firstElementChild as MultiSelectSk;
+      assert.deepEqual([1], (s as any)._selection);
       assert.deepEqual([1], s.selection);
     }));
 
@@ -49,10 +52,10 @@ describe('multi-select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as MultiSelectSk;
       s.selection = [];
       assert.deepEqual([], s.selection);
-      assert.isFalse(s.querySelector('#b').hasAttribute('selected'));
+      assert.isFalse(s.querySelector('#b')!.hasAttribute('selected'));
     }));
 
     it('treats null and undefined as []', () => window.customElements.whenDefined('select-sk').then(() => {
@@ -62,14 +65,14 @@ describe('multi-select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       s.selection = null;
       assert.equal(-1, s.selection);
-      assert.isFalse(s.querySelector('#b').hasAttribute('selected'));
+      assert.isFalse(s.querySelector('#b')!.hasAttribute('selected'));
 
       s.selection = 0;
       assert.equal(0, s.selection);
-      assert.isTrue(s.querySelector('#a').hasAttribute('selected'));
+      assert.isTrue(s.querySelector('#a')!.hasAttribute('selected'));
 
       s.selection = undefined;
       assert.equal(-1, s.selection);
@@ -82,9 +85,9 @@ describe('multi-select-sk', () => {
           <div id=b></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      const a = s.querySelector('#a');
-      const b = s.querySelector('#b');
+      const s = container.firstElementChild as MultiSelectSk;
+      const a = s.querySelector('#a')!;
+      const b = s.querySelector('#b')!;
       s.selection = [0];
       assert.deepEqual([0], s.selection);
       assert.isTrue(a.hasAttribute('selected'));
@@ -103,12 +106,12 @@ describe('multi-select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      assert.deepEqual([1], s._selection);
+      const s = container.firstElementChild as MultiSelectSk;
+      assert.deepEqual([1], (s as any)._selection);
       assert.deepEqual([1], s.selection);
       s.disabled = true;
-      s.selected = [0];
-      assert.deepEqual([1], s._selection);
+      s.selection = [0];
+      assert.deepEqual([1], (s as any)._selection);
       assert.deepEqual([1], s.selection);
       assert.isTrue(s.hasAttribute('disabled'));
     }));
@@ -120,11 +123,11 @@ describe('multi-select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      assert.deepEqual([], s._selection);
+      const s = container.firstElementChild as MultiSelectSk;
+      assert.deepEqual([], (s as any)._selection);
       assert.deepEqual([], s.selection);
       s.disabled = false;
-      assert.deepEqual([1], s._selection);
+      assert.deepEqual([1], (s as any)._selection);
       assert.deepEqual([1], s.selection);
       assert.isFalse(s.hasAttribute('disabled'));
     }));
@@ -139,7 +142,7 @@ describe('multi-select-sk', () => {
           <div></div>
           <div></div>
         </select>`;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as MultiSelectSk;
       s.selection = [5, 4, 0, 2];
       assert.deepEqual([0, 2, 4, 5], s.selection);
     }));
@@ -155,9 +158,10 @@ describe('multi-select-sk', () => {
           <div id=c></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      const a = s.querySelector('#a');
-      const b = s.querySelector('#b');
+      const s = container.firstElementChild as MultiSelectSk;
+      const a = s.querySelector<HTMLDivElement>('#a')!;
+      const b = s.querySelector<HTMLDivElement>('#b')!;
+      const c = s.querySelector<HTMLDivElement>('#c')!;
       a.click();
       assert.deepEqual([0], s.selection);
       assert.isTrue(a.hasAttribute('selected'));
@@ -184,9 +188,10 @@ describe('multi-select-sk', () => {
           <div id=c></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      const a = s.querySelector('#a');
-      const b = s.querySelector('#b');
+      const s = container.firstElementChild as MultiSelectSk;
+      const a = s.querySelector<HTMLDivElement>('#a')!;
+      const b = s.querySelector<HTMLDivElement>('#b')!;
+      const c = s.querySelector<HTMLDivElement>('#c')!;
       a.click();
       assert.deepEqual([], s.selection);
       assert.isFalse(a.hasAttribute('selected'));
@@ -215,7 +220,7 @@ describe('multi-select-sk', () => {
           <div></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as MultiSelectSk;
       assert.deepEqual([], s.selection);
       let div = document.createElement('div');
       div.setAttribute('selected', '');
@@ -240,7 +245,7 @@ describe('multi-select-sk', () => {
           <div></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as MultiSelectSk;
       assert.deepEqual([], s.selection);
       let div = document.createElement('div');
       div.setAttribute('selected', '');
@@ -267,9 +272,9 @@ describe('multi-select-sk', () => {
           <div id=d2 selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as MultiSelectSk;
       assert.deepEqual([2], s.selection);
-      s.querySelector('#d2').removeAttribute('selected');
+      s.querySelector('#d2')!.removeAttribute('selected');
       // Need to do the check post microtask so the mutation observer gets a
       // chance to fire.
       return Promise.resolve().then(() => {

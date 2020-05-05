@@ -52,19 +52,19 @@
 import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
-define('nav-links-sk', class extends HTMLElement {
-  static get observedAttributes() {
+export class NavLinksSk extends HTMLElement {
+  static get observedAttributes(): string[] {
     return ['shown'];
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     upgradeProperty(this, 'shown');
   }
 
-  /** @prop shown {boolean} Mirrors the shown attribute. */
-  get shown() { return this.hasAttribute('shown'); }
+  /** Mirrors the shown attribute. */
+  get shown(): boolean { return this.hasAttribute('shown'); }
 
-  set shown(val) {
+  set shown(val: boolean) {
     if (val) {
       this.setAttribute('shown', '');
     } else {
@@ -72,7 +72,7 @@ define('nav-links-sk', class extends HTMLElement {
     }
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: any, newValue: any): void {
     if (newValue !== null) {
       window.addEventListener('keydown', this);
     } else {
@@ -81,10 +81,12 @@ define('nav-links-sk', class extends HTMLElement {
     }
   }
 
-  handleEvent(e) {
+  handleEvent(e: KeyboardEvent) {
     if (e.key === 'Escape') {
       e.preventDefault();
       this.shown = false;
     }
   }
-});
+};
+
+define('nav-links-sk', NavLinksSk);

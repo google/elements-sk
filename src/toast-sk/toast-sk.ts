@@ -28,26 +28,28 @@
 import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';
 
-define('toast-sk', class extends HTMLElement {
+export class ToastSk extends HTMLElement {
+  private _timer: number | null;
+
   constructor() {
     super();
     this._timer = null;
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     if (!this.hasAttribute('duration')) {
       this.duration = 5000;
     }
     upgradeProperty(this, 'duration');
   }
 
-  /** @prop {number} duration Mirrors the duration attribute. */
-  get duration() { return +this.getAttribute('duration'); }
+  /** Mirrors the duration attribute. */
+  get duration(): number { return +(this.getAttribute('duration') || ''); }
 
-  set duration(val) { this.setAttribute('duration', val); }
+  set duration(val: number) { this.setAttribute('duration', val.toString()); }
 
   /** Displays the contents of the toast. */
-  show() {
+  show(): void {
     this.setAttribute('shown', '');
     if (this.duration > 0 && !this._timer) {
       this._timer = window.setTimeout(() => {
@@ -58,11 +60,13 @@ define('toast-sk', class extends HTMLElement {
   }
 
   /** Hides the contents of the toast. */
-  hide() {
+  hide(): void {
     this.removeAttribute('shown');
     if (this._timer) {
       window.clearTimeout(this._timer);
       this._timer = null;
     }
   }
-});
+};
+
+define('toast-sk', ToastSk);

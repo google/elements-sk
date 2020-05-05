@@ -12,8 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './index.js';
-import '../radio-sk';
+import { CheckOrRadio } from './checkbox-sk';
+import { RadioElement } from '../radio-sk/radio-sk';
+
+const assert = chai.assert;
 
 const container = document.createElement('div');
 document.body.appendChild(container);
@@ -22,17 +24,17 @@ afterEach(() => {
   container.innerHTML = '';
 });
 
-function _checkBoxSetup() {
+function _checkBoxSetup(): Promise<CheckOrRadio> {
   return window.customElements.whenDefined('checkbox-sk').then(() => {
     container.innerHTML = '<checkbox-sk></checkbox-sk>';
-    return container.querySelector('checkbox-sk');
+    return container.querySelector<CheckOrRadio>('checkbox-sk')!;
   });
 }
 
-function _radioSetup() {
+function _radioSetup(): Promise<RadioElement> {
   return window.customElements.whenDefined('radio-sk').then(() => {
     container.innerHTML = '<radio-sk></radio-sk>';
-    return container.querySelector('radio-sk');
+    return container.querySelector<RadioElement>('radio-sk')!;
   });
 }
 

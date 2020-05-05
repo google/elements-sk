@@ -12,7 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './index.js';
+import { SelectSk } from "./select-sk";
+
+const assert = chai.assert;
 
 const container = document.createElement('div');
 document.body.appendChild(container);
@@ -25,8 +27,8 @@ describe('select-sk', () => {
   describe('selection property', () => {
     it('has a default value', () => window.customElements.whenDefined('select-sk').then(() => {
       container.innerHTML = '<select-sk></select-sk>';
-      const s = container.firstElementChild;
-      assert.equal(-1, s._selection);
+      const s = container.firstElementChild as SelectSk;
+      assert.equal(-1, (s as any)._selection);
       assert.equal(-1, s.selection);
     }));
 
@@ -37,8 +39,8 @@ describe('select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      assert.equal(1, s._selection);
+      const s = container.firstElementChild as SelectSk;
+      assert.equal(1, (s as any)._selection);
       assert.equal(1, s.selection);
     }));
 
@@ -49,10 +51,10 @@ describe('select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       s.selection = -1;
       assert.equal(-1, s.selection);
-      assert.isFalse(s.querySelector('#b').hasAttribute('selected'));
+      assert.isFalse(s.querySelector('#b')!.hasAttribute('selected'));
     }));
 
     it('parses strings', () => window.customElements.whenDefined('select-sk').then(() => {
@@ -62,10 +64,10 @@ describe('select-sk', () => {
           <div id=b></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       s.selection = '1';
-      assert.equal(1, s.selection);
-      assert.isTrue(s.querySelector('#b').hasAttribute('selected'));
+      assert.equal(1, +s.selection);
+      assert.isTrue(s.querySelector('#b')!.hasAttribute('selected'));
     }));
 
     it('treats null and undefined and out of range as -1', () => window.customElements.whenDefined('select-sk').then(() => {
@@ -75,14 +77,14 @@ describe('select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       s.selection = null;
       assert.equal(-1, s.selection);
-      assert.isFalse(s.querySelector('#b').hasAttribute('selected'));
+      assert.isFalse(s.querySelector('#b')!.hasAttribute('selected'));
 
       s.selection = 0;
       assert.equal(0, s.selection);
-      assert.isTrue(s.querySelector('#a').hasAttribute('selected'));
+      assert.isTrue(s.querySelector('#a')!.hasAttribute('selected'));
 
       s.selection = undefined;
       assert.equal(-1, s.selection);
@@ -101,9 +103,9 @@ describe('select-sk', () => {
           <div id=b></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      const a = s.querySelector('#a');
-      const b = s.querySelector('#b');
+      const s = container.firstElementChild as SelectSk;
+      const a = s.querySelector('#a')!;
+      const b = s.querySelector('#b')!;
       s.selection = 0;
       assert.equal(0, s.selection);
       assert.isTrue(a.hasAttribute('selected'));
@@ -121,13 +123,13 @@ describe('select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      assert.equal(1, s._selection);
+      const s = container.firstElementChild as SelectSk;
+      assert.equal(1, (s as any)._selection);
       assert.equal(1, s.selection);
       assert.equal('0', s.getAttribute('tabindex'));
       s.disabled = true;
       s.selection = 0;
-      assert.equal(1, s._selection);
+      assert.equal(1, (s as any)._selection);
       assert.equal(1, s.selection);
       assert.equal(false, s.hasAttribute('tabindex'));
     }));
@@ -139,11 +141,11 @@ describe('select-sk', () => {
           <div id=b selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      assert.equal(-1, s._selection);
+      const s = container.firstElementChild as SelectSk;
+      assert.equal(-1, (s as any)._selection);
       assert.equal(-1, s.selection);
       s.disabled = false;
-      assert.equal(1, s._selection);
+      assert.equal(1, (s as any)._selection);
       assert.equal(1, s.selection);
       assert.isFalse(s.hasAttribute('disabled'));
     }));
@@ -157,10 +159,10 @@ describe('select-sk', () => {
           <div id=b></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       assert.equal('listbox', s.getAttribute('role'));
-      const a = s.querySelector('#a');
-      const b = s.querySelector('#b');
+      const a = s.querySelector<HTMLDivElement>('#a')!;
+      const b = s.querySelector<HTMLDivElement>('#b')!;
       a.click();
       assert.equal(0, s.selection);
       assert.isTrue(a.hasAttribute('selected'));
@@ -184,9 +186,9 @@ describe('select-sk', () => {
           <div id=b></div>
         </select>
         `;
-      const s = container.firstElementChild;
-      const a = s.querySelector('#a');
-      const b = s.querySelector('#b');
+      const s = container.firstElementChild as SelectSk;
+      const a = s.querySelector<HTMLDivElement>('#a')!;
+      const b = s.querySelector<HTMLDivElement>('#b')!;
       a.click();
       assert.equal(-1, s.selection);
       assert.isFalse(a.hasAttribute('selected'));
@@ -207,7 +209,7 @@ describe('select-sk', () => {
           <div></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       assert.equal(-1, s.selection);
       let div = document.createElement('div');
       div.setAttribute('selected', '');
@@ -229,7 +231,7 @@ describe('select-sk', () => {
           <div></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       assert.equal(-1, s.selection);
       let div = document.createElement('div');
       div.setAttribute('selected', '');
@@ -253,9 +255,9 @@ describe('select-sk', () => {
           <div id=d2 selected></div>
         </select>
         `;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       assert.equal(2, s.selection);
-      s.querySelector('#d2').removeAttribute('selected');
+      s.querySelector('#d2')!.removeAttribute('selected');
       // Need to do the check post microtask so the mutation observer gets a
       // chance to fire.
       return Promise.resolve().then(() => {
@@ -272,18 +274,18 @@ describe('select-sk', () => {
           <div></div>
           <div id=d2 selected></div>
         </select>`;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       assert.equal(2, s.selection);
-      s._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+      (s as any)._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
       assert.equal(1, s.selection);
-      s._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      (s as any)._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       assert.equal(2, s.selection);
-      s._onKeyDown(new KeyboardEvent('keydown', { key: 'Home' }));
+      (s as any)._onKeyDown(new KeyboardEvent('keydown', { key: 'Home' }));
       assert.equal(0, s.selection);
-      s._onKeyDown(new KeyboardEvent('keydown', { key: 'End' }));
+      (s as any)._onKeyDown(new KeyboardEvent('keydown', { key: 'End' }));
       assert.equal(2, s.selection);
       // Don't wrap around.
-      s._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      (s as any)._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       assert.equal(2, s.selection);
     }));
   }); // end describe('keyboard navigation')
@@ -296,7 +298,7 @@ describe('select-sk', () => {
           <div></div>
           <div id=d2 selected></div>
         </select>`;
-      const s = container.firstElementChild;
+      const s = container.firstElementChild as SelectSk;
       s.focus();
       assert.equal(s, document.activeElement);
       s.disabled = true;

@@ -30,7 +30,7 @@ import (
 )
 
 const SVG_SRC = "./node_modules/material-design-icons/%s/svg/production/"
-const SVG_DEST = "./src/icon/%s-icon-sk.js"
+const SVG_DEST = "./src/icon/%s-icon-sk.ts"
 
 const DEMO_HTML_PATH = "./pages/icon-sk.html"
 const DEMO_JS_PATH = "./pages/icon-sk.js"
@@ -167,13 +167,14 @@ iconSkTemplate.innerHTML = '<svg class="icon-sk-svg" xmlns="http://www.w3.org/20
 
 define('{{.Name}}-icon-sk', class extends HTMLElement {
 	connectedCallback() {
-	const icon = iconSkTemplate.content.cloneNode(true);
-    while (this.firstChild) {
-      this.removeChild(this.firstChild);
-    }
+		const icon = iconSkTemplate.content.cloneNode(true);
+		while (this.firstChild) {
+			this.removeChild(this.firstChild);
+		}
 		this.appendChild(icon);
 	}
-});`))
+});
+`))
 
 type htmlStruct struct {
 	Icons map[string][]string // maps category -> examples where examples are just the prefix.

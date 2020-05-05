@@ -47,27 +47,22 @@
  *
  */
 import { define } from '../define';
-import { upgradeProperty } from '../upgradeProperty';
 
-define('tabs-sk', class extends HTMLElement {
-  static get observedAttributes() {
+export class TabsSk extends HTMLElement {
+  static get observedAttributes(): string[] {
     return ['selected'];
   }
 
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
+  connectedCallback(): void {
     this.addEventListener('click', this);
     this.select(0, false);
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.removeEventListener('click', this);
   }
 
-  handleEvent(e) {
+  handleEvent(e: Event): void {
     e.stopPropagation();
     this.querySelectorAll('button').forEach((ele, i) => {
       if (ele === e.target) {
@@ -76,38 +71,44 @@ define('tabs-sk', class extends HTMLElement {
     });
   }
 
-  /** @prop selected {string} - Reflects the 'selected' attribute.  */
-  get selected() { return this.getAttribute('selected'); }
+  /** Reflects the 'selected' attribute.  */
+  get selected(): number { return +(this.getAttribute('selected') || ''); }
 
-  set selected(val) { this.setAttribute('selected', +val); }
+  set selected(val: number) { this.setAttribute('selected', String(val)); }
 
   /**
    * Force the selection of a tab
    *
-   * @param {number} index The index of the tab to select.
-   * @param {boolean} [trigger=false] If true then trigger the 'tab-selected-sk' event.
+   * @param index The index of the tab to select.
+   * @param trigger If true then trigger the 'tab-selected-sk' event.
    */
-  select(index, trigger = false) {
-    this.setAttribute('selected', index);
+  select(index: number, trigger = false): void {
+    this.selected = index;
     this.querySelectorAll('button').forEach((ele, i) => {
       ele.classList.toggle('selected', i === index);
     });
     this._trigger(index, trigger);
   }
 
-  _trigger(index, trigger) {
+  private _trigger(index: number, trigger: boolean): void {
     if (trigger) {
-      this.dispatchEvent(new CustomEvent('tab-selected-sk', { bubbles: true, detail: { index: index } }));
+      this.dispatchEvent(new CustomEvent<TabSelectedSkEventDetail>('tab-selected-sk', { bubbles: true, detail: { index: index } }));
     }
-    if (this.nextElementSibling.tagName === 'TABS-PANEL-SK') {
-      this.nextElementSibling.setAttribute('selected', index);
+    if (this.nextElementSibling?.tagName === 'TABS-PANEL-SK') {
+      this.nextElementSibling.setAttribute('selected', String(index));
     }
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: any, newValue: any) {
     if (oldValue == newValue) {
       return;
     }
     this.select(+newValue, false);
   }
-});
+};
+
+define('tabs-sk', TabsSk);
+
+export interface TabSelectedSkEventDetail {
+  readonly index: number;
+}
