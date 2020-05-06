@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "declaration": true,
+    "declarationMap": true,
+    "module": "es6",
+    "noImplicitAny": true,
+    "outDir": "elements-sk",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6",
+    "types": ["chai", "jasmine"]
+  },
+  "include": ["src/**/*.ts"]
+}
