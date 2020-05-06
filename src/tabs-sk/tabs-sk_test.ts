@@ -16,15 +16,24 @@ import { TabsSk } from "./tabs-sk";
 
 const assert = chai.assert;
 
-const container = document.createElement('div');
-document.body.appendChild(container);
-
-afterEach(() => {
-  container.innerHTML = '';
-});
-
 describe('tabs-sk', () => {
-  it('has selected attribute', () => Promise.all([customElements.whenDefined('tabs-sk'), customElements.whenDefined('tabs-panel-sk')]).then(() => {
+  let container: HTMLDivElement;
+
+  beforeAll(async () => {
+    await customElements.whenDefined('tabs-sk');
+    await customElements.whenDefined('tabs-panel-sk');
+  });
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(container)
+  });
+
+  it('has selected attribute', () => {
     container.innerHTML = `
         <tabs-sk>
           <button>One</button>
@@ -44,9 +53,9 @@ describe('tabs-sk', () => {
     assert.isNotNull(panel2);
     assert.isFalse(panel1.classList.contains('selected'));
     assert.isTrue(panel2.classList.contains('selected'));
-  })); // has selected attribute
+  }); // has selected attribute
 
-  it('has selected property', () => Promise.all([customElements.whenDefined('tabs-sk'), customElements.whenDefined('tabs-panel-sk')]).then(() => {
+  it('has selected property', () => {
     container.innerHTML = `
         <tabs-sk>
           <button>One</button>
@@ -66,5 +75,5 @@ describe('tabs-sk', () => {
     assert.isNotNull(panel2);
     assert.isFalse(panel1.classList.contains('selected'));
     assert.isTrue(panel2.classList.contains('selected'));
-  })); // has selected property
+  }); // has selected property
 });

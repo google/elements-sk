@@ -29,27 +29,27 @@ import (
 	"text/template"
 )
 
-const SVG_SRC = "./node_modules/material-design-icons/%s/svg/production/"
-const SVG_DEST = "./src/icon/%s-icon-sk.ts"
+const svgSrc = "./node_modules/material-design-icons/%s/svg/production/"
+const svgDest = "./src/icon/%s-icon-sk.ts"
 
-const DEMO_HTML_PATH = "./pages/icon-sk.html"
-const DEMO_JS_PATH = "./pages/icon-sk.js"
+const demoHtmlPath = "./pages/icon-sk.html"
+const demoJsPath = "./pages/icon-sk.js"
 
-var SVG_FOLDERS = []string{"action", "alert", "av", "communication", "content",
+var svgFolders = []string{"action", "alert", "av", "communication", "content",
 	"device", "editor", "file", "hardware", "image", "maps", "navigation",
 	"notification", "places", "social", "toggle"}
 
-var SVG_24PX_FILE = regexp.MustCompile(`(ic_)?(?P<name>.+)_24px.svg`)
-var SVG_CONTENT = regexp.MustCompile(`<svg .+?>(?P<content>.+)</svg>`)
+var svg24pxFile = regexp.MustCompile(`(ic_)?(?P<name>.+)_24px.svg`)
+var svgContent = regexp.MustCompile(`<svg .+?>(?P<content>.+)</svg>`)
 
 func main() {
 	generatedMap := map[string][]string{}
 	generated := map[string]bool{}
 
 	fmt.Println("Generating...")
-	for _, f := range SVG_FOLDERS {
+	for _, f := range svgFolders {
 		fmt.Printf("from %s: ", f)
-		d := fmt.Sprintf(SVG_SRC, f)
+		d := fmt.Sprintf(svgSrc, f)
 		fmt.Println(d)
 		svgs, err := ioutil.ReadDir(d)
 		if err != nil {
@@ -60,7 +60,7 @@ Did you run 'npm install' first?
 		}
 		generatedMap[f] = []string{}
 		for _, s := range svgs {
-			if match := SVG_24PX_FILE.FindStringSubmatch(s.Name()); match != nil {
+			if match := svg24pxFile.FindStringSubmatch(s.Name()); match != nil {
 				file := filepath.Join(d, s.Name())
 				name := sanitizeName(match[2])
 
@@ -77,16 +77,16 @@ Did you run 'npm install' first?
 		fmt.Println()
 	}
 
-	h, err := os.Create(DEMO_HTML_PATH)
+	h, err := os.Create(demoHtmlPath)
 	if err != nil {
 		fmt.Printf("cannot make demo html: %s\n", err)
 		return
 	}
-	if err = DEMO_PAGE_HTML_TEMPLATE.Execute(h, htmlStruct{Icons: generatedMap}); err != nil {
+	if err = demoPageHtmlTemplate.Execute(h, htmlStruct{Icons: generatedMap}); err != nil {
 		fmt.Printf("HTML template error %s\n", err)
 	}
 
-	j, err := os.Create(DEMO_JS_PATH)
+	j, err := os.Create(demoJsPath)
 	if err != nil {
 		fmt.Printf("cannot make demo js: %s\n", err)
 		return
@@ -97,7 +97,7 @@ Did you run 'npm install' first?
 		names = append(names, k)
 	}
 	sort.Strings(names)
-	if err = DEMO_PAGE_JS_TEMPLATE.Execute(j, jsStruct{Names: names}); err != nil {
+	if err = demoPageJsTemplate.Execute(j, jsStruct{Names: names}); err != nil {
 		fmt.Printf("JS template error %s\n", err)
 	}
 }
@@ -116,13 +116,13 @@ func createIconFile(name, srcPath string) error {
 	if err != nil {
 		return err
 	}
-	if match := SVG_CONTENT.FindStringSubmatch(string(data)); match != nil {
+	if match := svgContent.FindStringSubmatch(string(data)); match != nil {
 		// match[1] has the svg content
-		created := fmt.Sprintf(SVG_DEST, name)
+		created := fmt.Sprintf(svgDest, name)
 		if output, err := os.Create(created); err != nil {
 			return err
 		} else {
-			err = ICON_SK_TEMPLATE.Execute(output, iconStruct{
+			err = iconSkTemplate.Execute(output, iconStruct{
 				Name:    name,
 				Content: match[1],
 			})
@@ -141,7 +141,7 @@ type iconStruct struct {
 	Content string
 }
 
-var ICON_SK_TEMPLATE = template.Must(template.New("icon-sk").Parse(`/* This is a generated file!
+var iconSkTemplate = template.Must(template.New("icon-sk").Parse(`/* This is a generated file!
  *   SVG path data from https://github.com/google/material-design-icons used
  *   under an Apache 2.0 license.
  *
@@ -180,7 +180,7 @@ type htmlStruct struct {
 	Icons map[string][]string // maps category -> examples where examples are just the prefix.
 }
 
-var DEMO_PAGE_HTML_TEMPLATE = template.Must(template.New("icon-demo-html").Parse(`<!-- This is a generated file! -->
+var demoPageHtmlTemplate = template.Must(template.New("icon-demo-html").Parse(`<!-- This is a generated file! -->
 <!DOCTYPE html>
 <title>icons-sk demo</title>
 <meta charset="utf-8" />
@@ -241,7 +241,7 @@ type jsStruct struct {
 	Names []string
 }
 
-var DEMO_PAGE_JS_TEMPLATE = template.Must(template.New("icon-demo-js").Parse(`/* This is a generated file! */
+var demoPageJsTemplate = template.Must(template.New("icon-demo-js").Parse(`/* This is a generated file! */
 // Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -257,4 +257,5 @@ var DEMO_PAGE_JS_TEMPLATE = template.Must(template.New("icon-demo-js").Parse(`/*
 // limitations under the License.
 
 {{range .Names}}import 'elements-sk/icon/{{.}}-icon-sk';
-{{end}}`))
+{{end}}
+`))

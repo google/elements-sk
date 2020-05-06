@@ -41,10 +41,10 @@
  *            <code>label</code> element in the DOM with the 'for' attribute
  *            set to match the name of the radio-sk.
  *
- * @prop {boolean} checked This mirrors the checked attribute.
- * @prop {boolean} disabled This mirrors the disabled attribute.
- * @prop {string} name This mirrors the name attribute.
- * @prop {string} label This mirrors the label attribute.
+ * @prop checked This mirrors the checked attribute.
+ * @prop disabled This mirrors the disabled attribute.
+ * @prop name This mirrors the name attribute.
+ * @prop label This mirrors the label attribute.
  */
 
 // Note that we are importing just the class, not the whole element + CSS definition.

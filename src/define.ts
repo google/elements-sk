@@ -21,8 +21,8 @@
  *
  * See also https://github.com/karma-runner/karma/issues/412
  *
- * @param {string} tagName - The name of the tag.
- * @param {function} cl - The class for the given tag.
+ * @param tagName - The name of the tag.
+ * @param cl - The class for the given tag.
  *
  * @example
  *

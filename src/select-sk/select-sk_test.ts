@@ -16,23 +16,31 @@ import { SelectSk } from "./select-sk";
 
 const assert = chai.assert;
 
-const container = document.createElement('div');
-document.body.appendChild(container);
-
-afterEach(() => {
-  container.innerHTML = '';
-});
-
 describe('select-sk', () => {
+  let container: HTMLDivElement;
+
+  beforeAll(async () => {
+    await window.customElements.whenDefined('select-sk');
+  });
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(container);
+  });
+
   describe('selection property', () => {
-    it('has a default value', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('has a default value', () => {
       container.innerHTML = '<select-sk></select-sk>';
       const s = container.firstElementChild as SelectSk;
       assert.equal(-1, (s as any)._selection);
       assert.equal(-1, s.selection);
-    }));
+    });
 
-    it('changes based on children', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('changes based on children', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div id=a></div>
@@ -42,9 +50,9 @@ describe('select-sk', () => {
       const s = container.firstElementChild as SelectSk;
       assert.equal(1, (s as any)._selection);
       assert.equal(1, s.selection);
-    }));
+    });
 
-    it('can go back to -1', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('can go back to -1', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div id=a></div>
@@ -55,9 +63,9 @@ describe('select-sk', () => {
       s.selection = -1;
       assert.equal(-1, s.selection);
       assert.isFalse(s.querySelector('#b')!.hasAttribute('selected'));
-    }));
+    });
 
-    it('parses strings', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('parses strings', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div id=a></div>
@@ -68,9 +76,9 @@ describe('select-sk', () => {
       s.selection = '1';
       assert.equal(1, +s.selection);
       assert.isTrue(s.querySelector('#b')!.hasAttribute('selected'));
-    }));
+    });
 
-    it('treats null and undefined and out of range as -1', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('treats null and undefined and out of range as -1', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div id=a></div>
@@ -94,9 +102,9 @@ describe('select-sk', () => {
 
       s.selection = -3;
       assert.equal(-1, s.selection);
-    }));
+    });
 
-    it('changes selected attributes on children', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('changes selected attributes on children', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div id=a></div>
@@ -114,9 +122,9 @@ describe('select-sk', () => {
       assert.equal(1, s.selection);
       assert.isFalse(a.hasAttribute('selected'));
       assert.isTrue(b.hasAttribute('selected'));
-    }));
+    });
 
-    it('stays fixed when disabled', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('stays fixed when disabled', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div id=a></div>
@@ -132,9 +140,9 @@ describe('select-sk', () => {
       assert.equal(1, (s as any)._selection);
       assert.equal(1, s.selection);
       assert.equal(false, s.hasAttribute('tabindex'));
-    }));
+    });
 
-    it('gets updated when select-sk is re-enabled', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('gets updated when select-sk is re-enabled', () => {
       container.innerHTML = `
         <select-sk id=select disabled>
           <div id=a></div>
@@ -148,11 +156,11 @@ describe('select-sk', () => {
       assert.equal(1, (s as any)._selection);
       assert.equal(1, s.selection);
       assert.isFalse(s.hasAttribute('disabled'));
-    }));
+    });
   }); // end describe('selected property')
 
   describe('click', () => {
-    it('changes selection', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('changes selection', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div id=a></div>
@@ -177,9 +185,9 @@ describe('select-sk', () => {
       assert.equal('false', a.getAttribute('aria-selected'));
       assert.isTrue(b.hasAttribute('selected'));
       assert.equal('true', b.getAttribute('aria-selected'));
-    }));
+    });
 
-    it('ignores clicks when disabled', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('ignores clicks when disabled', () => {
       container.innerHTML = `
         <select-sk id=select disabled>
           <div id=a></div>
@@ -197,11 +205,11 @@ describe('select-sk', () => {
       assert.equal(-1, s.selection);
       assert.isFalse(a.hasAttribute('selected'));
       assert.isFalse(b.hasAttribute('selected'));
-    }));
+    });
   }); // end describe('click')
 
   describe('inserting new children', () => {
-    it('updates selection property', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('updates selection property', async () => {
       container.innerHTML = `
         <select-sk id=select>
           <div></div>
@@ -218,12 +226,11 @@ describe('select-sk', () => {
       s.appendChild(div);
       // Need to do the check post microtask so the mutation observer gets a
       // chance to fire.
-      return Promise.resolve().then(() => {
-        assert.equal(3, s.selection);
-      });
-    }));
+      await Promise.resolve();
+      assert.equal(3, s.selection);
+    });
 
-    it('does not check children when disabled', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('does not check children when disabled', async () => {
       container.innerHTML = `
         <select-sk id=select disabled>
           <div></div>
@@ -240,14 +247,13 @@ describe('select-sk', () => {
       s.appendChild(div);
       // Need to do the check post microtask so the mutation observer gets a
       // chance to fire.
-      return Promise.resolve().then(() => {
-        assert.equal(-1, s.selection);
-      });
-    }));
+      await Promise.resolve();
+      assert.equal(-1, s.selection);
+    });
   }); // end describe('inserting new children')
 
   describe('mutation of child selected attribute', () => {
-    it('does not update selection', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('does not update selection', async () => {
       container.innerHTML = `
         <select-sk id=select>
           <div></div>
@@ -260,14 +266,13 @@ describe('select-sk', () => {
       s.querySelector('#d2')!.removeAttribute('selected');
       // Need to do the check post microtask so the mutation observer gets a
       // chance to fire.
-      return Promise.resolve().then(() => {
-        assert.equal(2, s.selection);
-      });
-    }));
+      await Promise.resolve();
+      assert.equal(2, s.selection);
+    });
   }); // end describe('mutation of child selected attribute'
 
   describe('keyboard navigation', () => {
-    it('follows arrow keys', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('follows arrow keys', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div></div>
@@ -287,11 +292,11 @@ describe('select-sk', () => {
       // Don't wrap around.
       (s as any)._onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       assert.equal(2, s.selection);
-    }));
+    });
   }); // end describe('keyboard navigation')
 
   describe('focus', () => {
-    it('drops focus when disabled', () => window.customElements.whenDefined('select-sk').then(() => {
+    it('drops focus when disabled', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div></div>
@@ -303,6 +308,6 @@ describe('select-sk', () => {
       assert.equal(s, document.activeElement);
       s.disabled = true;
       assert.notEqual(s, document.activeElement);
-    }));
+    });
   }); // end describe('focus')
 });

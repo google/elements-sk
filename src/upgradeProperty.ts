@@ -20,8 +20,8 @@
  *
  * See this [Google Developers article]{@link https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties } for more details.
  *
- * @param {Element} ele -The element.
- * @param {string} prop - The name of the property to upgrade.
+ * @param ele -The element.
+ * @param prop - The name of the property to upgrade.
  *
  * @example
  *

@@ -17,29 +17,32 @@ import { RadioElement } from '../radio-sk/radio-sk';
 
 const assert = chai.assert;
 
-const container = document.createElement('div');
-document.body.appendChild(container);
+let container: HTMLDivElement;
 
-afterEach(() => {
-  container.innerHTML = '';
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
 });
 
-function _checkBoxSetup(): Promise<CheckOrRadio> {
-  return window.customElements.whenDefined('checkbox-sk').then(() => {
-    container.innerHTML = '<checkbox-sk></checkbox-sk>';
-    return container.querySelector<CheckOrRadio>('checkbox-sk')!;
-  });
+afterEach(() => {
+  document.body.removeChild(container);
+});
+
+async function checkBoxSetup(): Promise<CheckOrRadio> {
+  await window.customElements.whenDefined('checkbox-sk');
+  container.innerHTML = '<checkbox-sk></checkbox-sk>';
+  return container.querySelector<CheckOrRadio>('checkbox-sk')!;
 }
 
-function _radioSetup(): Promise<RadioElement> {
-  return window.customElements.whenDefined('radio-sk').then(() => {
-    container.innerHTML = '<radio-sk></radio-sk>';
-    return container.querySelector<RadioElement>('radio-sk')!;
-  });
+async function radioSetup(): Promise<RadioElement> {
+  await window.customElements.whenDefined('radio-sk');
+  container.innerHTML = '<radio-sk></radio-sk>';
+  return container.querySelector<RadioElement>('radio-sk')!;
 }
 
 describe('checkbox-sk', () => {
-  it('responds to click()', () => _checkBoxSetup().then((cb) => {
+  it('responds to click()', async () => {
+    const cb = await checkBoxSetup();
     assert.isFalse(cb.checked);
 
     let called = false;
@@ -51,11 +54,12 @@ describe('checkbox-sk', () => {
 
     cb.click();
     assert.isFalse(cb.checked);
-  }));
+  });
 });
 
 describe('radio-sk', () => {
-  it('responds to click()', () => _radioSetup().then((rb) => {
+  it('responds to click()', async () => {
+    const rb = await radioSetup();
     assert.isFalse(rb.checked);
 
     let called = false;
@@ -66,5 +70,5 @@ describe('radio-sk', () => {
     assert.isTrue(rb.checked);
     rb.click();
     assert.isTrue(rb.checked);
-  }));
+  });
 });
