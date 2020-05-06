@@ -1,3 +1,6 @@
 node_modules/
 out/
 dist/
+
+# Generated icon elements.
+elements-sk/icon/*.js
