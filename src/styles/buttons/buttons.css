@@ -1,90 +1,72 @@
-@import url(../../colors.css);
+@import url(../../themes/themes.css);
 /*
  *  A set of styles to make buttons and select/options look more Material Design-ish.
  **/
 button {
   min-width: 5.14em;
-  background-color: var(--white);
-  color: var(--blue);
-  fill: var(--blue);
+  background-color: var(--surface);
+  color: var(--on-surface);
+  fill: var(--on-surface);
   text-align: center;
   text-transform: uppercase;
   outline: none;
-  border-radius: 4px;
   padding: 0.6em 1.2em;
-  border: solid lightgray 1px;
+  border: solid var(--on-surface) 1px;
   margin: 0.6em;
   height: 3em;
-  transition: box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 2px 2px 2px 0 var(--light-gray);
 }
 
 button:hover {
-  background: var(--dark-white);
+  background: var(--surface-1dp);
 }
 
 button.action:hover {
-  background: var(--light-blue);
-  color: var(--black);
+  background: var(--primary-variant);
+  color: var(--on-primary-variant);
 }
 
 button:focus {
-  outline: dashed 2px var(--blue);
+  outline: dashed 2px var(--on-surface);
   outline-offset: 3px;
 }
 
-button:active {
-  background-color: var(--blue);
-  transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 2px 2px 8px 0 var(--light-gray);
+button:active,
+button.action:active,
+button.fab:active {
+  background-color: var(--background);
+  color: var(--on-background);
+  fill: var(--on-background);
 }
 
 button:disabled {
-  color: var(--gray);
-  fill: var(--gray);
-  background-color: var(--white);
-}
-
-button.action:active {
-  background-color: var(--light-blue);
-  transition: background-color 0.1s color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--disabled);
+  border-color: var(--on-disabled);
+  color: var(--on-disabled);
+  fill: var(--on-disabled);
 }
 
 button.action {
-  color: var(--white);
-  fill: var(--white);
-  background: var(--blue);
-  border: solid rgba(0,0,0,0) 1px;
+  color: var(--on-primary);
+  fill: var(--on-primary);
+  background: var(--primary);
+  border: solid rgba(0, 0, 0, 0) 1px;
 }
 
 button.action:disabled {
-  color: var(--white);
-  fill: var(--white);
-  background: var(--gray);
-  border: solid rgba(0,0,0,0) 1px;
+  background: var(--disabled);
+  color: var(--on-disabled);
 }
 
 button.fab {
+  color: var(--on-secondary);
+  fill: var(--on-secondary);
+  background: var(--secondary);
   border-radius: 50%;
+  border: none;
   padding: 10px;
   width: 48px;
   height: 48px;
   min-width: 0px;
   font-weight: bold;
-  color: var(--white);
-  background: var(--red);
   font-size: 22px;
-  transition: box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 2px 2px 8px 0 var(--gray);
 }
-
-button.fab:hover {
-  background: var(--light-red);
-  color: var(--black);
-}
-
-button.fab:active {
-  background: var(--red);
-  box-shadow: 2px 2px 5px 0 var(--light-gray);
-}
-

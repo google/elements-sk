@@ -1,11 +1,11 @@
-@import url(../colors.css);
+@import url(../themes/themes.css);
 
 nav-links-sk {
   display: none;
   position: absolute;
   z-index: 200;
-  background: var(--white);
-  border: solid 1px var(--light-gray);
+  border: solid 1px var(--on-surface);
+  background: var(--surface);
   margin-left: 16px;
 }
 
@@ -16,10 +16,11 @@ nav-links-sk[shown] {
 nav-links-sk a {
   display: block;
   padding: 12px;
-  color: var(--blue);
-  fill: var(--blue);
+  background: var(--surface);
+  color: var(--on-surface);
+  fill: var(--on-surface);
 }
 
 nav-links-sk a:hover {
-  background: var(--light-gray);
+  background: var(--surface-1dp);
 }
