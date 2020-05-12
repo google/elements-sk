@@ -1,42 +1,43 @@
-@import url(../../colors.css);
+@import url(../../themes/themes.css);
 /*
  * Styles for select and options to make them look better.
  */
 select,
 option {
   padding: 0.6em;
-  background-color: var(--white);
+  background-color: var(--surface);
+  color: var(--on-surface);
+  fill: var(--on-surface);
   border: none;
   outline: none;
   line-height: 20px;
   vertical-align: middle;
-  border-radius: 4px;
 }
 
 select {
-  border: solid 1px var(--light-blue);
+  border: solid 1px var(--on-surface);
   margin: 0.6em;
 }
 
-select option:focus,
 select:focus {
-  border: solid 1px var(--light-gray);
-  outline: dashed 2px var(--blue);
+  outline: dashed 2px var(--on-surface);
   outline-offset: 3px;
 }
 
 option:hover {
-  background-color: var(--dark-white);
+  background-color: var(--surface-1dp);
 }
 
 option:focus {
-  background-color: var(--dark-white);
+  background-color: var(--primary);
+  color: var(--on-primary);
   transition: background-color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 option:checked {
-  background-color: var(--light-blue);
-  color: var(--blue);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  fill: var(--on-primary);
 }
 
 select {

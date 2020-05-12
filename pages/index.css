@@ -1,3 +1,5 @@
+@import url(../src/themes/themes.css);
+
 * {
   font-family: sans-serif;
 }
@@ -10,7 +12,12 @@ body {
   padding: 2em;
 }
 
-select-sk, multi-select-sk {
+select-sk,
+multi-select-sk {
   border: 1px solid grey;
   margin: 3px;
+}
+
+a {
+  color: var(--primary);
 }

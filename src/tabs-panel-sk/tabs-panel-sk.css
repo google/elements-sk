@@ -1,8 +1,7 @@
-@import url(../colors.css);
+@import url(../themes/themes.css);
 
 tabs-panel-sk {
   display: block;
-  border: solid 4px var(--blue);
   margin: 0;
   padding: 16px;
   margin-top: -4px;
