@@ -1,4 +1,4 @@
-@import url(../colors.css);
+@import url(../themes/themes.css);
 
 tabs-sk > button {
   margin: 0;
@@ -6,16 +6,18 @@ tabs-sk > button {
   box-shadow: none;
   border-radius: 0;
   border: none;
-  color: var(--gray);
-  fill: var(--gray);
-  background-color: var(--light-blue);
-  border-bottom: solid 4px var(--blue);
+  color: var(--on-background);
+  fill: var(--on-background);
+  background-color: var(--background);
+  border-bottom: solid 4px var(--on-background);
 }
 
 tabs-sk > button.selected {
-  background: var(--blue);
+  background: var(--surface);
   border: none;
   box-shadow: none;
-  color: var(--white);
-  fill: var(--white);
+  color: var(--primary);
+  fill: var(--primary);
+  border-bottom: solid 4px var(--primary);
+  font-weight: bold;
 }

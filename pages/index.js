@@ -40,5 +40,9 @@ import { errorMessage } from 'elements-sk/errorMessage';
 import './index.css';
 
 document.getElementById('make_error').addEventListener('click', () => {
-	errorMessage('Oh no, there was a problem!', 4000 /* ms*/);
-})
+  errorMessage('Oh no, there was a problem!', 4000 /* ms */);
+});
+
+document.getElementById('toggle-darkmode').addEventListener('click', () => {
+  document.body.classList.toggle('darkmode');
+});
