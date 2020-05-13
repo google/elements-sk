@@ -1,23 +1,45 @@
 /* A basic color theme and associated dark theme inspired by
    https://material.io/design/color/dark-theme.html.
 
- Can be imported via:
+Can be imported via:
 
     @import '~elements-sk/themes/themes';
+
+When choosing colors for a theme be sure to use the Material
+Design Color Tool:
+
+   https://material.io/resources/color/
+
+And follow the guidance on the use of colors for both light
+and dark themes:
+
+  https://material.io/design/color/the-color-system.html#color-theme-creation
+  https://material.io/design/color/dark-theme.html#ui-application
 */
 
 @import url(./color-palette.css);
 
 /* Define Color Palette */
 html {
-  /* See https://material.io/design/color/dark-theme.html for how to use each
-     of the below. */
+  /* See https://material.io/design/color/dark-theme.html for how to use each of
+     the CSS variables below.
+
+     This theme was generated using the Material Design Color Tool with the
+     following selections:
+
+     https://material.io/resources/color/#!/?view.left=1&view.right=0&secondary.color=D84315&primary.color=1565C0
+
+     The "Accessibility" tab shows the text colors to use for legibility.
+
+     The colors were chosen to meet MD guidelines and come as close as possible
+     to the color scheme elements-sk had before theme support was added.
+     */
   --primary: var(--blue-800);
   --on-primary: var(--white);
-  --primary-variant: var(--blue-600);
-  --on-primary-variant: var(--white);
+  --primary-variant: #5e92f3;
+  --on-primary-variant: var(--black);
   --secondary: var(--deep-orange-800);
-  --on-secondary: var(--white);
+  --on-secondary: var(--black);
   --background: var(--grey-50);
   --on-background: var(--black);
   --surface: var(--white);
@@ -31,11 +53,16 @@ html {
   --transparent-overlay: rgba(0, 0, 0, 0.5);
 }
 
-/* Class to override colors with dark theme */
+/* Class to override colors with dark theme.
+
+These colors match the names of the colors given in
+https://material.io/design/color/dark-theme.html#ui-application for the default
+dark color scheme.
+*/
 .darkmode {
   --primary: var(--purple-200);
   --on-primary: var(--black);
-  --primary-variant: var(--deep-purple-700);
+  --primary-variant: var(--indigo-700);
   --on-primary-variant: var(--white);
   --secondary: var(--teal-200);
   --on-secondary: var(--black);
@@ -52,18 +79,18 @@ html {
   --transparent-overlay: rgba(255, 255, 255, 0.5);
 }
 
-/* Ensure the body respects darkmode */
-body {
-  background-color: var(--background);
-  color: var(--on-background);
-  fill: var(--on-background);
-}
-
 /* Helper classes to set elements to colors sets. */
 .primary-container-themes-sk {
   background-color: var(--primary);
   color: var(--on-primary);
   fill: var(--on-primary);
+}
+
+/* Ensure the body respects darkmode */
+.body-sk {
+  background-color: var(--background);
+  color: var(--on-background);
+  fill: var(--on-background);
 }
 
 .primary-themes-sk {
