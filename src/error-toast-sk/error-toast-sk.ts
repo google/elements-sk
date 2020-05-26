@@ -41,7 +41,7 @@
  */
 import { define } from '../define';
 import { ToastSk } from '../toast-sk/toast-sk';
-import '../toast-sk/toast-sk';
+import '../toast-sk';
 import { ErrorSkEventDetail } from '../errorMessage';
 
 define('error-toast-sk', class extends HTMLElement {
