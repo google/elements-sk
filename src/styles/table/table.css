@@ -1,0 +1,40 @@
+@import url(../../themes/themes.css);
+/*
+ *  Styling for native-HTML tables.
+ **/
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--surface-2dp);
+}
+
+tr:hover {
+  background-color: var(--surface-1dp);
+}
+
+tr:hover tr:hover {
+  background-color: var(--surface-2dp);
+}
+
+td,th {
+  color: var(--on-surface);
+  padding: 10px;
+}
+
+td {
+  font-size: 0.813em;
+  vertical-align: middle;
+}
+
+th {
+  font-size: 0.75em;
+  opacity: 60%;
+}
+
+td.number {
+  text-align: right;
+}

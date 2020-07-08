@@ -24,6 +24,7 @@ import 'elements-sk/select-sk';
 import 'elements-sk/spinner-sk';
 import 'elements-sk/styles/buttons';
 import 'elements-sk/styles/select';
+import 'elements-sk/styles/table';
 import 'elements-sk/tabs-panel-sk';
 import 'elements-sk/tabs-sk';
 import 'elements-sk/toast-sk';
