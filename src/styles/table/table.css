@@ -8,30 +8,26 @@ table {
 }
 
 tr {
-  background-color: var(--surface);
+  background-color: var(--background);
   border-bottom: 1px solid var(--surface-2dp);
 }
 
 tr:hover {
-  background-color: var(--surface-1dp);
+  background-color: var(--surface);
 }
 
-tr:hover tr:hover {
-  background-color: var(--surface-2dp);
-}
-
-td,th {
-  color: var(--on-surface);
+td, th {
+  color: var(--on-background);
   padding: 10px;
 }
 
 td {
-  font-size: 0.813em;
+  font-size: 90%;
   vertical-align: middle;
 }
 
 th {
-  font-size: 0.75em;
+  font-size: 75%;
   opacity: 60%;
 }
 
