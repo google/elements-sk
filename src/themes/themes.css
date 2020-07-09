@@ -51,6 +51,10 @@ html {
   --error: var(--red-900);
   --on-error: var(--white);
   --transparent-overlay: rgba(0, 0, 0, 0.5);
+
+  --text-intensity-high: 87%;
+  --text-intensity-medium: 60%;
+  --text-intensity-disabled: 38%;
 }
 
 /* Class to override colors with dark theme.
