@@ -44,8 +44,8 @@ html {
   --on-background: var(--black);
   --surface: var(--white);
   --on-surface: var(--black);
-  --surface-1dp: var(--grey-100);
-  --surface-2dp: var(--grey-300);
+  --surface-1dp: var(--grey-200);
+  --surface-2dp: var(--grey-400);
   --disabled: var(--grey-100);
   --on-disabled: var(--grey-700);
   --error: var(--red-900);
@@ -68,9 +68,9 @@ dark color scheme.
   --on-secondary: var(--black);
   --background: var(--black);
   --on-background: var(--white);
-  --surface: var(--grey-700);
+  --surface: var(--grey-900);
   --surface-1dp: var(--grey-800);
-  --surface-2dp: var(--grey-900);
+  --surface-2dp: var(--grey-700);
   --disabled: var(--grey-600);
   --on-disabled: var(--grey-300);
   --on-surface: var(--white);
