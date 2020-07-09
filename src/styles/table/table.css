@@ -16,7 +16,8 @@ tr:hover {
   background-color: var(--surface);
 }
 
-td, th {
+td,
+th {
   color: var(--on-background);
   padding: 10px;
 }
@@ -28,7 +29,7 @@ td {
 
 th {
   font-size: 75%;
-  opacity: 60%;
+  opacity: var(--text-intensity-medium);
 }
 
 td.number {
