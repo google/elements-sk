@@ -23,6 +23,7 @@ button:hover {
 button.action:hover {
   background: var(--primary-variant);
   color: var(--on-primary-variant);
+  fill: var(--on-primary-variant);
 }
 
 button:focus {
@@ -55,6 +56,7 @@ button.action {
 button.action:disabled {
   background: var(--disabled);
   color: var(--on-disabled);
+  fill: var(--on-disabled);
 }
 
 button.fab {
