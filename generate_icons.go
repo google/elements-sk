@@ -159,7 +159,7 @@ var iconSkTemplate = template.Must(template.New("icon-sk").Parse(`/* This is a g
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import './icon-sk.css';
+import './icon-sk.scss';
 import { define } from '../define';
 
 const iconSkTemplate = document.createElement('template');

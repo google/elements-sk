@@ -16,4 +16,4 @@
  *
  * @description CSS Styling for native select and options elements.
  */
-import './select.css';
+import './select.scss';

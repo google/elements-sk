@@ -13,4 +13,4 @@
 // limitations under the License.
 
 import './tabs-panel-sk.js';
-import './tabs-panel-sk.css';
+import './tabs-panel-sk.scss';

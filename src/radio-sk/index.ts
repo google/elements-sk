@@ -13,4 +13,4 @@
 // limitations under the License.
 
 import './radio-sk.js';
-import './radio-sk.css';
+import './radio-sk.scss';

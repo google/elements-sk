@@ -13,4 +13,4 @@
 // limitations under the License.
 
 import './select-sk.js';
-import './select-sk.css';
+import './select-sk.scss';

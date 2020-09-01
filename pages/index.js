@@ -38,7 +38,7 @@ import 'elements-sk/icon/warning-icon-sk';
 
 import { errorMessage } from 'elements-sk/errorMessage';
 
-import './index.css';
+import './index.scss';
 
 document.getElementById('make_error').addEventListener('click', () => {
   errorMessage('Oh no, there was a problem!', 4000 /* ms */);

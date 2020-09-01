@@ -32,4 +32,4 @@
  *   </tr>
  * </table>
  */
-import './table.css';
+import './table.scss';

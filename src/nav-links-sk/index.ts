@@ -13,4 +13,4 @@
 // limitations under the License.
 
 import './nav-links-sk.js';
-import './nav-links-sk.css';
+import './nav-links-sk.scss';

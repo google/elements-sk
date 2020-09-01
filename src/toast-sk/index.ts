@@ -13,4 +13,4 @@
 // limitations under the License.
 
 import './toast-sk.js';
-import './toast-sk.css';
+import './toast-sk.scss';

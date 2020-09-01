@@ -26,13 +26,19 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name]-bundle.js?[chunkhash]',
   },
+  devServer: {
+    // The two below options are required to access the dev server from a different host (e.g.
+    // serve from workstation, access from laptop).
+    host: '0.0.0.0',
+    disableHostCheck: true,
+  },
   resolve: {
     modules: [path.resolve(__dirname), "node_modules"],
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.[s]?css$/,
         use: ExtractTextPlugin.extract({
           use: [
             {
@@ -42,6 +48,7 @@ module.exports = {
               },
             },
             { loader:'postcss-loader' },
+            { loader:'sass-loader' },
           ],
         })
       },

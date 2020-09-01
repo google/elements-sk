@@ -21,4 +21,4 @@
  * <button class=action>Action Button</button>
  * <button class=fab>Floating Action Button</button>
  */
-import './buttons.css';
+import './buttons.scss';
