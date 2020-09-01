@@ -13,4 +13,4 @@
 // limitations under the License.
 
 import './checkbox-sk.js';
-import './checkbox-sk.css';
+import './checkbox-sk.scss';
