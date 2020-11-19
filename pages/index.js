@@ -41,7 +41,7 @@ import { errorMessage } from 'elements-sk/errorMessage';
 import './index.scss';
 
 document.getElementById('make_error').addEventListener('click', () => {
-  errorMessage('Oh no, there was a problem!', 4000 /* ms */);
+  errorMessage('Oh no, there was a problem!', 0);
 });
 
 document.getElementById('toggle-darkmode').addEventListener('click', () => {

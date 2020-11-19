@@ -17,13 +17,13 @@
  * @description <h2><code>toast-sk</code></h2>
  *
  * <p>
- *   Notification toast that pops up from the bottom of the screen
- *   when shown.
+ *   Notification toast that pops up from the bottom of the screen when shown.
+ *   Note that toast-sk doesn't add anyting inside the toast, it just presents
+ *   the existing child elements.
  * </p>
  *
- * @attr duration - The duration, in ms, to display the notification.
- *               Defaults to 5000. A value of 0 means to display
- *               forever.
+ * @attr duration - The duration, in ms, to display the notification. Defaults
+ *               to 5000. A value of 0 means to display forever.
  */
 import { define } from '../define';
 import { upgradeProperty } from '../upgradeProperty';

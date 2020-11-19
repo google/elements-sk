@@ -44,24 +44,32 @@ import { ToastSk } from '../toast-sk/toast-sk';
 import '../toast-sk';
 import { ErrorSkEventDetail } from '../errorMessage';
 
-define('error-toast-sk', class extends HTMLElement {
-  private _toast: ToastSk | null = null;
+export class ErrorToastSk extends HTMLElement {
+  private toast: ToastSk | null = null;
+  private span: HTMLSpanElement | null = null;
 
   connectedCallback(): void {
-    this.innerHTML = '<toast-sk></toast-sk>';
-    this._toast = this.firstElementChild as ToastSk;
+    this.innerHTML = '<toast-sk><span></span><button title="Close">✗</button></toast-sk>';
+    this.toast = this.firstElementChild as ToastSk;
+    this.span = this.toast!.firstElementChild as HTMLSpanElement;
+
     document.addEventListener('error-sk', this);
+    this.querySelector('button')!.addEventListener('click', (e) => this.clickHandler());
   }
 
   disconnectedCallback(): void {
     document.removeEventListener('error-sk', this);
   }
 
-  handleEvent(e: CustomEvent<ErrorSkEventDetail>) {
-    if (e.detail.duration) {
-      this._toast!.duration = e.detail.duration;
-    }
-    this._toast!.textContent = e.detail.message;
-    this._toast!.show();
+  clickHandler() {
+    this.toast!.hide()
   }
-});
+
+  handleEvent(e: CustomEvent<ErrorSkEventDetail>) {
+    this.toast!.duration = e.detail.duration;
+    this.span!.textContent = e.detail.message
+    this.toast!.show();
+  }
+}
+
+define('error-toast-sk', ErrorToastSk);
