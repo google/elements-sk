@@ -13,3 +13,4 @@
 // limitations under the License.
 
 import './error-toast-sk.js';
+import './error-toast-sk.scss';
