@@ -67,6 +67,7 @@ export class MultiSelectSk extends HTMLElement {
     this.addEventListener('click', this._click);
     this._obs.observe(this, {
       childList: true,
+      attributes: true,
     });
     this._bubbleUp();
   }

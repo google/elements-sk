@@ -253,7 +253,7 @@ describe('select-sk', () => {
   }); // end describe('inserting new children')
 
   describe('mutation of child selected attribute', () => {
-    it('does not update selection', async () => {
+    it('does update selection', async () => {
       container.innerHTML = `
         <select-sk id=select>
           <div></div>
@@ -267,7 +267,7 @@ describe('select-sk', () => {
       // Need to do the check post microtask so the mutation observer gets a
       // chance to fire.
       await Promise.resolve();
-      assert.equal(2, s.selection);
+      assert.notEqual(2, s.selection);
     });
   }); // end describe('mutation of child selected attribute'
 
