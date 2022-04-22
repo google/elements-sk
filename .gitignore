@@ -3,6 +3,7 @@ out/
 dist/
 coverage/
 elements-sk/
+.parcel-cache
 
 # Generated icon elements.
 src/icon/*.ts

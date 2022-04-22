@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [16.x, 17.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -34,5 +34,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm run build:ci
+        timeout-minutes: 10
         env:
           CI: true
