@@ -257,17 +257,18 @@ describe('select-sk', () => {
       container.innerHTML = `
         <select-sk id=select>
           <div></div>
-          <div></div>
+          <div id=d1></div>
           <div id=d2 selected></div>
         </select>
         `;
       const s = container.firstElementChild as SelectSk;
       assert.equal(2, s.selection);
       s.querySelector('#d2')!.removeAttribute('selected');
+      s.querySelector('#d1')!.setAttribute('selected', '');
       // Need to do the check post microtask so the mutation observer gets a
       // chance to fire.
       await Promise.resolve();
-      assert.notEqual(2, s.selection);
+      assert.equal(1, s.selection);
     });
   }); // end describe('mutation of child selected attribute'
 

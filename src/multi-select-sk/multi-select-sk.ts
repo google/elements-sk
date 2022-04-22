@@ -66,6 +66,7 @@ export class MultiSelectSk extends HTMLElement {
     upgradeProperty(this, 'disabled');
     this.addEventListener('click', this._click);
     this._obs.observe(this, {
+      subtree: true,
       childList: true,
       attributes: true,
     });

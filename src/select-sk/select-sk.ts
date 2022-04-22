@@ -72,8 +72,10 @@ export class SelectSk extends HTMLElement {
     this.addEventListener('click', this._click);
     this.addEventListener('keydown', this._onKeyDown);
     this._obs.observe(this, {
+      subtree: true,
       childList: true,
       attributes: true,
+      attributeFilter: ["selected"],
     });
     this._bubbleUp();
   }
