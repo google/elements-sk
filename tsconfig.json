@@ -5,8 +5,8 @@
     "declarationMap": true,
     "module": "es6",
     "noImplicitAny": true,
-    "outDir": "elements-sk",
     "sourceMap": true,
+    "inlineSources": true,
     "strict": true,
     "target": "es6",
     "types": ["chai", "jasmine"]

@@ -3,7 +3,9 @@ module.exports = function(config) {
     frameworks: ["jasmine", "chai", "karma-typescript"],
 
     files: [
-      { pattern: "src/**/*.ts" },
+      // Exclude .d.ts files, which cause Karma to fail with errors such as:
+      //     No source found for (...)/src/checkbox-sk/checkbox-sk_test.d.ts
+      { pattern: "src/**/!(*.d).ts" },
     ],
 
     preprocessors: {

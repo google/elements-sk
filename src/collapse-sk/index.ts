@@ -12,5 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './collapse-sk.js';
+import './collapse-sk';
 import './collapse-sk.scss';

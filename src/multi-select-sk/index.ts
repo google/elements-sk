@@ -12,5 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './multi-select-sk.js';
+import './multi-select-sk';
 import './multi-select-sk.scss';
