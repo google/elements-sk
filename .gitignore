@@ -7,3 +7,9 @@ elements-sk/
 
 # Generated icon elements.
 src/icon/*.ts
+
+# TypeScript compiler output files.
+src/**/*.d.ts
+src/**/*.d.ts.map
+src/**/*.js
+src/**/*.js.map

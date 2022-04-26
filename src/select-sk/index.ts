@@ -12,5 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import './select-sk.js';
+import './select-sk';
 import './select-sk.scss';

@@ -2,19 +2,6 @@
 clean-build:
 	npm run clean; npm run build
 
-.PHONY: default
-default:
-	npx webpack-cli --mode=development
-
-.PHONY: release
-release:
-	npm ci
-	npx webpack-cli --mode=production
-
-.PHONY: serve
-serve:
-	npx webpack-dev-server --mode=production --content-base ./dist --watch-poll
-
 .PHONY: test
 test:
 	npx karma start --single-run --browsers ChromeHeadless
