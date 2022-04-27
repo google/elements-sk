@@ -56,7 +56,7 @@ export class SelectSk extends HTMLElement {
   private _selection: number;
 
   static get observedAttributes(): string[] {
-    return ['disabled'];
+    return [ 'disabled' ];
   }
 
   constructor() {
@@ -71,19 +71,27 @@ export class SelectSk extends HTMLElement {
     upgradeProperty(this, 'disabled');
     this.addEventListener('click', this._click);
     this.addEventListener('keydown', this._onKeyDown);
-    this._obs.observe(this, {
-      subtree: true,
-      childList: true,
-      attributes: true,
-      attributeFilter: ["selected"],
-    });
+    this.observerConnect();
     this._bubbleUp();
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('click', this._click);
     this.removeEventListener('keydown', this._onKeyDown);
+    this.observerDisconnect();
+  }
+
+  observerDisconnect() {
     this._obs.disconnect();
+  }
+
+  observerConnect() {
+    this._obs.observe(this, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: [ "selected" ],
+    });
   }
 
   /** This mirrors the disabled attribute. */
@@ -132,7 +140,7 @@ export class SelectSk extends HTMLElement {
     }
     if (target?.parentElement === this) {
       for (let i = 0; i < this.children.length; i++) {
-        if (this.children[i] === target) {
+        if (this.children[ i ] === target) {
           this._selection = i;
           break;
         }
@@ -155,6 +163,7 @@ export class SelectSk extends HTMLElement {
 
   // Loop over all immediate child elements and make sure at most only one is selected.
   private _rationalize(): void {
+    this.observerDisconnect();
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'listbox');
     }
@@ -162,7 +171,7 @@ export class SelectSk extends HTMLElement {
       this.setAttribute('tabindex', '0');
     }
     for (let i = 0; i < this.children.length; i++) {
-      const child = this.children[i];
+      const child = this.children[ i ];
       if (!child.hasAttribute('role')) {
         child.setAttribute('role', 'option');
       }
@@ -174,6 +183,7 @@ export class SelectSk extends HTMLElement {
         child.setAttribute('aria-selected', 'false');
       }
     }
+    this.observerConnect();
   }
 
   // Loop over all immediate child elements and find the first one selected.
@@ -183,7 +193,7 @@ export class SelectSk extends HTMLElement {
       return;
     }
     for (let i = 0; i < this.children.length; i++) {
-      if (this.children[i].hasAttribute('selected')) {
+      if (this.children[ i ].hasAttribute('selected')) {
         this._selection = i;
         break;
       }
