@@ -65,21 +65,32 @@ export class MultiSelectSk extends HTMLElement {
     upgradeProperty(this, 'selection');
     upgradeProperty(this, 'disabled');
     this.addEventListener('click', this._click);
-    this._obs.observe(this, {
-      subtree: true,
-      childList: true,
-      attributes: true,
-    });
+    this.observerConnect();
     this._bubbleUp();
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('click', this._click);
+    this.observerDisconnect();
+  }
+
+  observerDisconnect() {
     this._obs.disconnect();
   }
 
+  observerConnect() {
+    this._obs.observe(this, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: [ 'selected' ],
+    });
+  }
+
   /** Whether this element should respond to input. */
-  get disabled(): boolean { return this.hasAttribute('disabled'); }
+  get disabled(): boolean {
+    return this.hasAttribute('disabled');
+  }
 
   set disabled(val: boolean) {
     if (val) {
@@ -95,7 +106,9 @@ export class MultiSelectSk extends HTMLElement {
    * A sorted array of indices that are selected or [] if nothing is selected.
    * If selection is set to a not sorted array, it will be sorted anyway.
    */
-  get selection(): number[] { return this._selection; }
+  get selection(): number[] {
+    return this._selection;
+  }
 
   set selection(val) {
     if (this.disabled) {
@@ -128,30 +141,37 @@ export class MultiSelectSk extends HTMLElement {
       target.setAttribute('selected', '');
     }
     this._bubbleUp();
-    this.dispatchEvent(new CustomEvent<MultiSelectSkSelectionChangedEventDetail>('selection-changed', {
-      detail: {
-        selection: this._selection,
-      },
-      bubbles: true,
-    }));
+    this.dispatchEvent(
+      new CustomEvent<MultiSelectSkSelectionChangedEventDetail>(
+        'selection-changed',
+        {
+          detail: {
+            selection: this._selection,
+          },
+          bubbles: true,
+        }
+      )
+    );
   }
 
   // Loop over all immediate child elements update the selected attributes
   // based on the selected property of this selement.
   private _rationalize(): void {
+    this.observerDisconnect();
     // assume this.selection is sorted when this is called.
     let s = 0;
     for (let i = 0; i < this.children.length; i++) {
-      if (this.children[i].getAttribute('tabindex') == null) {
-        this.children[i].setAttribute('tabindex', '0');
+      if (this.children[ i ].getAttribute('tabindex') == null) {
+        this.children[ i ].setAttribute('tabindex', '0');
       }
-      if (this._selection[s] === i) {
-        this.children[i].setAttribute('selected', '');
+      if (this._selection[ s ] === i) {
+        this.children[ i ].setAttribute('selected', '');
         s++;
       } else {
-        this.children[i].removeAttribute('selected');
+        this.children[ i ].removeAttribute('selected');
       }
     }
+    this.observerConnect();
   }
 
   // Loop over all immediate child elements and find all with the selected
@@ -162,16 +182,16 @@ export class MultiSelectSk extends HTMLElement {
       return;
     }
     for (let i = 0; i < this.children.length; i++) {
-      if (this.children[i].hasAttribute('selected')) {
+      if (this.children[ i ].hasAttribute('selected')) {
         this._selection.push(i);
       }
     }
     this._rationalize();
   }
-};
+}
 
 define('multi-select-sk', MultiSelectSk);
 
 export interface MultiSelectSkSelectionChangedEventDetail {
   readonly selection: number[];
-};
+}
