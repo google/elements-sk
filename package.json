@@ -12,7 +12,7 @@
     "build-icons": "go run generate_icons.go",
     "build-typescript": "npx tsc",
     "build-assets": "rsync -avz src/ elements-sk/",
-    "build-demo-pages": "npx parcel build pages/*.html",
+    "build-demo-pages": "npx parcel build --public-url '.' pages/*.html",
     "test": "npx karma start --single-run --browsers ChromeHeadless",
     "build:ci": "npm ci && npm run clean && npm run build && npm run test"
   },
