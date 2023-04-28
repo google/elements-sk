@@ -1,3 +1,7 @@
+**THIS REPOSITORY IS ARCHIVED**. Code moved to the Skia Infrastructure repository
+[here](https://skia.googlesource.com/buildbot/+/28404b632bd4830fe00185f5db86cfad4cc63abb/elements-sk)
+(see [CL](https://skia-review.googlesource.com/c/buildbot/+/652357)).
+
 elements-sk
 ===========
 
